@@ -458,7 +458,7 @@ const projects = [
         { q: "آیا وب‌ سایت ما می‌تواند به فایل‌های اکسل متصل شود؟",a:"تخصص ما در کنار طراحی وب، یکپارچه‌سازی سیستم‌های داده‌محور است. می‌توانم وب‌ سایت شما را به گونه‌ای طراحی کنم که داده‌های خروجیِ اکسل‌تان را به راحتی در پنل مدیریتی‌تان تحلیل و مشاهده کنید." 
 },
         { q: "آیا سیستم با نرم‌افزارهای موجود سازگار است؟", a: "بله، راهکارهای من از طریق روش‌های استاندارد، با نرم‌افزارهای مالی و ERPهای داخلی هماهنگ می‌شوند." },
-        { q: "زمان تحویل پروژه هوشمندسازی چقدر است؟", a: "با توجه به تحلیل نیازهای شما، زمان‌بندی دقیق در جلسه مشاوره مشخص می‌شود اما به طور معمول پروژه‌ها بین ۷ تا ۱۵ روز کاری نهایی می‌شوند." },
+        { q: "زمان تحویل پروژه هوشمندسازی اکسل چقدر است؟", a: "با توجه به تحلیل نیازهای شما، زمان‌بندی دقیق در جلسه مشاوره مشخص می‌شود اما به طور معمول پروژه‌ها بین ۷ تا ۱۵ روز کاری نهایی می‌شوند." },
         { q: "آیا پس از تحویل، پشتیبانی فنی ارائه می‌دهید؟", a: "قطعا! تمامی پروژه‌ها دارای یک ماه پشتیبانی رایگان به همراه فیلم آموزشی و امکان تمدید قرارداد برای نگهداری و توسعه هستند." },
         { q: "امنیت داده‌های حساس در اکسل چگونه تضمین می‌شود؟", a: "من از روش‌های محافظت از فایل و محدودسازی دسترسی در سطوح مختلف استفاده می‌کنم تا امنیت اطلاعات شما حفظ شود." }
       ].map((faq, i) => (
@@ -682,7 +682,7 @@ const projects = [
     </a>
 
     {/* تلگرام */}
-    <a href="https://telegram.me/@myproweb56" target="_blank" className="group relative flex items-center justify-end">
+    <a href="https://telegram.me/989194077618" target="_blank" className="group relative flex items-center justify-end">
       <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط تلگرام</span>
       <div className="w-14 h-14 bg-[#3E99D8] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
         <SiTelegram size={30} color="white" />
@@ -771,26 +771,25 @@ const projects = [
   </div>
   </section>
 {/* مودالِ مشاوره رایگان بدون محاسبات ه */}
+{/* مودالِ مشاوره رایگان با اعتبارسنجی */}
 {isProjectModalOpen && (
   <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" dir="rtl">
-    {/* بک‌دراپ */}
-    <div 
-      className="absolute inset-0 bg-blue-950/80 backdrop-blur-sm" 
-      onClick={() => setIsProjectModalOpen(false)}
-    ></div>
-   
+    {/* بک‌دراپ بدون قابلیت بسته شدن */}
+    <div className="absolute inset-0 bg-blue-950/80 backdrop-blur-sm"></div>
     
     <div className="relative bg-white w-full max-w-md p-8 rounded-[2rem] shadow-2xl">
       <h3 className="text-2xl font-black text-blue-950 mb-4 text-right">دریافت مشاوره رایگان</h3>
-      {/* دکمه ضربدر با موقعیت‌دهی منفی برای قرارگیری روی لبه */}
+      
+      {/* دکمه ضربدر */}
       <button 
         onClick={() => setIsProjectModalOpen(false)}
-        className="absolute -top-70 -right-10 bg-white border-2 border-slate-200 text-slate-500 p-2 rounded-full shadow-lg hover:text-blue-950 hover:border-blue-950 transition-all z-10"
+        className="absolute -top-7 -right-7 bg-white border-2 border-slate-200 text-slate-500 p-2 rounded-full shadow-lg hover:text-blue-950 hover:border-blue-950 transition-all z-10"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+
       <div className="space-y-4">
         <input 
           type="text" 
@@ -801,21 +800,36 @@ const projects = [
         />
         <input 
           type="tel" 
-          placeholder="شماره تماس..." 
+          placeholder="شماره تماس (مثال: 09123456789)" 
           dir="ltr" 
+          maxLength={11}
           value={userPhone} 
-          onChange={(e) => setUserPhone(e.target.value)} 
+          onChange={(e) => {
+            const val = e.target.value.replace(/[^0-9]/g, ''); // فقط عدد بگیرد
+            setUserPhone(val);
+          }} 
           className="w-full p-4 bg-slate-100 rounded-xl border border-slate-200 text-right" 
         />
         
         <button 
-onClick={() => {
-  // این نام‌ها باید دقیقاً با قالب EmailJS یکی باشند
-  const templateParams = {
-    name: restaurantName,      // به جای restaurant_name
-    message: userPhone,        // به جای phone
-    time: new Date().toLocaleString('fa-IR') // اضافه کردن زمان برای پر شدن متغیر time
-  };
+          onClick={() => {
+            // اعتبارسنجی
+            if (restaurantName.trim() === "") {
+              alert("لطفاً نام کسب‌وکار را وارد کنید.");
+              return;
+            }
+            if (userPhone.length !== 11 || !userPhone.startsWith("09")) {
+              alert("شماره موبایل باید ۱۱ رقم بوده و با 09 شروع شود.");
+              return;
+            }
+
+            // ارسال در صورت تأیید
+            const templateParams = {
+              name: restaurantName,
+              message: userPhone,
+              time: new Date().toLocaleString('fa-IR')
+            };
+
             emailjs.send(
               'service_4404k4a', 
               'template_an9us09', 
@@ -823,14 +837,14 @@ onClick={() => {
               'iU4RrJwUhH5MO3M7X'
             )
             .then(() => { 
-              alert("با موفقیت ارسال شد."); 
+              alert("درخواست شما با موفقیت ثبت شد."); 
               setRestaurantName("");
               setUserPhone("");
-              setIsProjectModalOpen(false); // بستن مودال پس از موفقیت
+              setIsProjectModalOpen(false);
             })
             .catch((error) => {
               console.error("EmailJS Error:", error);
-              alert("خطا در ارسال اطلاعات. لطفاً دوباره تلاش کنید.");
+              alert("خطا در ارسال. لطفاً اتصال اینترنت را بررسی کنید.");
             });
           }}
           className="w-full py-4 bg-cyan-500 text-white font-black rounded-xl hover:bg-cyan-600 transition-all"
@@ -838,8 +852,6 @@ onClick={() => {
           ثبت درخواست
         </button>
       </div>
-
-
     </div>
   </div>
 )}
