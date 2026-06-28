@@ -1,4 +1,7 @@
 "use client";
+import { motion } from "framer-motion";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Send, MessageCircle, Home as HomeIcon, FolderKanban, TrendingUp } from 'lucide-react';
@@ -7,6 +10,14 @@ import CommentList from '../CommentList';
 import { IoLogoWhatsapp } from "react-icons/io";
 import { SiTelegram } from "react-icons/si";
 import { FaLinkedin } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 
 // اتصال به Supabase
 const supabase = createClient(
@@ -23,11 +34,23 @@ export default function ContactHeader() {
   const [orders, setOrders] = useState("");
   const [result, setResult] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-const [isprojectModalOpen, setIsprojectModalOpen] = useState(false);
+const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [restaurantName, setRestaurantName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedProjects, setSelectedProjects] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+ const [openAsil, setOpenAsil] = useState(false);
+const [indexAsil, setIndexAsil] = useState(0);
+
+const [openShaho, setOpenShaho] = useState(false);
+const [indexShaho, setIndexShaho] = useState(0);
+
+
+
+
+
 
   const services = [
     { title: "توسعه وب‌سایت‌های داینامیک", desc: "طراحی پنل‌های مدیریت رستوران و سامانه‌های اختصاصی.", icon: "🌐" },
@@ -100,9 +123,21 @@ const handleContactSubmit = async (e: any) => {
     }
   }, [isTimeModalOpen]);
 
+
+const projects = [
+  { 
+    id: 1, 
+    title:"داشبورد هوشمند ارزی و مالی اکسل",
+    desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان",
+    video: "/gold-3.mp4", 
+    fullDetail:`داشبورد مدیریتی در اکسل با قابلیت وب‌اسکرپینگ و دریافت لحظه‌ای نرخ دلار و طلا. این پروژه مجهز به موتور تحلیل هوشمند (باکس بنفش تایپ متحرک)، آرشیو خودکار سوابق قیمت و معماری منحصربه‌فرد مولتی‌لنگوئیج است که کل محیط داشبورد، چیدمان فیزیکی باکس‌ها (Mirroring) و نمودارها را به صورت آنی بین ۴ زبان فارسی، انگلیسی، فرانسه و آلمانی سوئیچ می‌کند.`, 
+    color: "from-amber-500 to-orange-600" 
+  },
+]
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 pt-20" dir="rtl">
-
+<Header setIsProjectModalOpen={setIsProjectModalOpen} />
 
                {selectedImage && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
@@ -110,30 +145,6 @@ const handleContactSubmit = async (e: any) => {
           <img src={selectedImage} className="max-w-full max-h-full rounded-2xl" />
         </div>
       )}  
-          {/* هدر شیک و مدرن */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <nav className="max-w-6xl mx-auto px-8 py-4 flex justify-between items-center">
-          <div className="text-2xl font-black text-blue-950">
-            My<span className="text-amber-500">Pro</span>Web
-          </div>
-          
-          <div className="hidden md:flex gap-8 font-bold text-blue-950">
-     <a href="/" className="hover:text-amber-500 transition-colors">خانه</a>
-   <a href="#top" className="hover:text-amber-500 transition-colors">پروژه‌ها شاخص</a>
-  <a href="#calculator" className="hover:text-amber-500 transition-colors">محاسبه رایگان سودِ غذا و هزینه‌ها</a>
-     <a href="#aboutus" className="hover:text-amber-500 transition-colors">درباره ما</a>
- <a href="#QR" className="hover:text-amber-500 transition-colors">پرسش و پاسخ</a>
-   <a href="/portfolio" className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</a>       
-          </div>
-          <button 
- onClick={() => setIsprojectModalOpen(true)}
-  className= "   bg-blue-950 text-white px-6 py-2.5 rounded-full font-black hover:bg-amber-500 transition-all shadow-lg"
->
- مشاوره رایگان
-</button>
-        </nav>
-      </header>
-
 <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white w-full flex flex-col justify-center items-center pt-25 pb-25">
 
 
@@ -168,6 +179,8 @@ const handleContactSubmit = async (e: any) => {
   </div>
 
 </section>
+
+{/* ماشین حساب زمان ه */}
 {isTimeModalOpen && (
   <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-blue-950/80 backdrop-blur-md">
     <div className="bg-white p-8 rounded-3xl max-w-md w-full shadow-2xl">
@@ -276,8 +289,8 @@ const handleContactSubmit = async (e: any) => {
   من متخصصِ مدیریت و تحلیل داده در اکسل هستم و حالا با همین نگاهِ دقیق و داده‌محور، وارد دنیای طراحی وب شده‌ام. 
   رویکردِ من در پروژه‌ها این است: 
   <span className="block mt-4 font-semibold text-white">• تبدیلِ داده‌های پیچیده به داشبوردهای مدیریتیِ ساده</span>
-  <span className="block font-semibold text-white">• ساختِ وب‌ سایت‌های کاربردی با تمرکز بر نظم و کارایی</span>
-  <span className="block font-semibold text-white">• یادگیری و پیاده‌سازی جدیدترین راهکارها برای رشد کسب‌وکارهای کوچک</span>
+  <span className="block font-semibold text-white">•  ساختِ وب‌ سایت‌های کاربردی با تمرکز بر نظم ، کارایی ، هوشمند و دقیق  </span>
+  <span className="block font-semibold text-white">• یادگیری وپیاده‌سازی جدیدترین راهکارها وهوشمندسازی کسب‌ و کارهای کوچک</span>
 </p>
     </div>
   </div>
@@ -288,7 +301,7 @@ const handleContactSubmit = async (e: any) => {
 {/* بخش فراخوان  */}
 <section className="flex flex-col items-center justify-center py-25 bg-white-950">
      {/* عنوان - فاصله از پایین (mb-10) بیشتر شد تا از آیکون فاصله بگیرد */}
-  <h3 className="text-3xl md:text-4xl font-black text-blue text-center px-10 mb-12">
+  <h3 className="text-3xl md:text-3xl font-black text-blue text-center px-10 mb-12">
     آیا می‌دانید چقدر وقت و پول شما هدر می‌رود؟
   </h3>
  
@@ -301,130 +314,135 @@ const handleContactSubmit = async (e: any) => {
   {/* باکس نارنجی */}
   <a 
   href="#calculator"
-      className="bg-amber-500 hover:bg-amber-400 text-blue-950 px-10 py-4 rounded-full text-lg font-black shadow-lg shadow-amber-500/30 transition-all hover:scale-105 cursor-pointer"
+      className="bg-amber-500 hover:bg-amber-400 text-blue-950 px-8 py-4 rounded-full text-lg font-black shadow-lg shadow-amber-500/30 transition-all hover:scale-105 cursor-pointer"
   >
     🚀 همین حالا با یک کلیک سود خود را رایگان محاسبه کنید
   </a>
 </section>
 
-{/*  بدون محاسبه مودالِ شروع پروژه */}
-{isprojectModalOpen && (
-  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" dir="rtl">
-    {/* بک‌دراپ */}
-    <div className="absolute inset-0 bg-blue-950/80 backdrop-blur-sm" onClick={() => setIsprojectModalOpen(false)}></div>
-    
-    <div className="relative bg-white w-full max-w-md p-8 rounded-[2rem] shadow-2xl">
-      <h3 className="text-2xl font-black text-blue-950 mb-4 text-right">دریافت مشاوره رایگان</h3>
-      
-      <div className="space-y-4">
-        <input 
-          type="text" 
-          placeholder="نام کسب وکار.." 
-          value={restaurantName} 
-          onChange={(e) => setRestaurantName(e.target.value)} 
-          className="w-full p-4 bg-slate-100 rounded-xl border border-slate-200 text-right" 
-        />
-        <input 
-          type="tel" 
-          placeholder="شماره تماس..." 
-          dir="ltr" 
-          value={userPhone} 
-          onChange={(e) => setUserPhone(e.target.value)} 
-          className="w-full p-4 bg-slate-100 rounded-xl border border-slate-200 text-right" 
-        />
+
+<section id="top" className="py-24 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-4 md:px-8">
+  <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-16">پروژه‌های شاخص</h2>
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+    {/* کارت ۱: رستوران اصیل */}
+    <motion.div whileHover={{ scale: 1.05 }} className="h-full bg-white rounded-3xl border border-slate-200 shadow-lg p-6 flex flex-col overflow-hidden">
+      <h3 className="text-xl font-bold text-blue-950 mb-4 text-center">گالری پروژه رستوران اصیل</h3>
+      <Swiper modules={[Navigation, Pagination]} navigation pagination={{ clickable: true }} className="w-full h-auto rounded-2xl">
+        {[
+          { src: '/asil1.png', title: 'رستوران اصیل', text: 'صفحه اصلی -دموی اولیه' },
+          { src: '/asil2.png', title: 'رستوران اصیل', text: 'منو غذا' },
+          { src: '/asil3.png', title: 'رستوران اصیل', text: 'منو غذا' },
+          { src: '/asil4.png', title: 'رستوران اصیل', text: 'سبد خرید' },
+          { src: '/asil5.png', title: 'رستوران اصیل', text: 'چاپ فاکتور' },
+          { src: '/asil6.png', title: 'رستوران اصیل', text: 'مدیریت سفارشات' },
+          { src: '/asil7.png', title: 'رستوران اصیل', text: 'ویرایش سفارشات' },
+          { src: '/asil8.png', title: 'رستوران اصیل', text: 'پنل کاربری' },
+          { src: '/asil9.png', title: 'رستوران اصیل', text: 'باشگاه مشتریان' },
+        ].map((item, idx) => (
+          <SwiperSlide key={idx} className="pb-8 cursor-pointer" onClick={() => { setIndexAsil(idx); setOpenAsil(true); }}>
+            <div className="flex flex-col">
+              <img src={item.src} alt={item.title} className="w-full h-48 object-cover rounded-2xl" />
+              <div className="mt-3 text-right p-2">
+                <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
+                <p className="text-slate-600 text-xs mt-1">{item.text}</p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Lightbox open={openAsil} close={() => setOpenAsil(false)} index={indexAsil} slides={[
+        {src: '/asil1.png'}, {src: '/asil2.png'}, {src: '/asil3.png'}, {src: '/asil4.png'}, 
+        {src: '/asil5.png'}, {src: '/asil6.png'}, {src: '/asil7.png'}, {src: '/asil8.png'}, {src: '/asil9.png'}
+      ]} />
+    </motion.div>
+
+    {/* کارت ۲: پروژه‌های داینامیک */}
+    {projects.map((pro) => (
+      <motion.div key={pro.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-slate-50 rounded-3xl p-6 shadow-lg border border-slate-300 flex flex-col justify-between">
+        <h3 className="text-xl font-bold text-blue-950   text-center  ">   {pro.title}</h3>
+        <div>
+          <div className={`h-40 rounded-2xl mb-6 overflow-hidden ${!pro.video ? `bg-gradient-to-tr ${pro.color}` : ""}`}>
+            {pro.video ? (
+              <video src={pro.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full opacity-90 gap-2"></div>
+            )}
+          </div>
         
-        <button 
-  onClick={() => {
-    emailjs.send(
-      'service_4404k4a', 
-      'template_an9us09', 
-      { restaurant_name: restaurantName, phone: userPhone }, 
-      'iU4RrJwUhH5MO3M7X'
-    )
-    .then(() => { 
-      alert("با موفقیت ارسال شد."); 
-      // فقط فیلدها را پاک می‌کنیم، مودال را نمی‌بندیم:
-      setRestaurantName("");
-      setUserPhone("");
-    })
-    .catch(() => alert("خطا در ارسال اطلاعات"));
-  }}
-  className="w-full py-4 bg-cyan-500 text-white font-black rounded-xl hover:bg-cyan-600 transition-all"
->
-  ثبت درخواست
-</button>
-      </div>
-
-      {/* دکمه ضربدر */}
-      <button 
-        onClick={() => setIsprojectModalOpen(false)} // اصلاح شد
-        className="absolute top-6 left-6 text-slate-400 hover:text-blue-950 transition-colors"
-      >
-        ✕
-      </button>
-    </div>
-  </div>
-)}
-
-{/* بخش پروژه‌ها */}
-<section id="top" className="py-24 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-8">
-  <h2 className="text-4xl font-extrabold text-center mb-20">پروژه‌های شاخص</h2>
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    
-{/* کارت ۱: رستوران اصیل + کارت‌های تعاملی */}
-<div className="bg-amber-500 rounded-3xl overflow-hidden shadow-sm border border-blue-100 h-fit">
-  <img src="/asil.jpeg" alt="پروژه رستوران" className="w-full h-48 object-cover" />
-  <div className="p-4 text-blue-950 text-center font-bold">پروژه رستوران اصیل</div>
- 
-<div className="grid grid-cols-3 gap-2 px-2 pb-4">
-  {[
-    { icon: "⚡", title: "تحویل سریع", desc: "۷ روزه", color: "text-amber-500" },
-    { icon: "🛡️", title: "پشتیبانی", desc: "کلیک کن!", isSupport: true, color: "font-bold text-blue-600" },
-    { icon: "🎯", title: "مدیریت", desc: "آسان", color: "text-green-500" }
-  ].map((item, index) => (
-    <div 
-      key={index}
-      onClick={() => item.isSupport ? handleSupportClick() : null}
-      className={`relative p-3 rounded-2xl border-2 border-blue-400/30 bg-white 
-                 hover:border-blue-500 hover:shadow-blue-200 hover:scale-[1.03] 
-                 transition-all duration-300 cursor-pointer 
-                 flex flex-col items-center justify-center text-center shadow-sm group`}
-    >
-      <div className={`text-2xl mb-1 group-hover:scale-110 transition-transform ${item.icon === "🛡️" ? "font-bold text-blue-600" : item.color}`}>
-        {item.icon}
-      </div>
-      
-      <h4 className="text-xs font-black text-blue-950 mb-0.5 truncate w-full">{item.title}</h4>
-      {/* متن‌های desc بولد شدند با کلاس font-bold */}
-      <p className="text-[11px] font-bold text-slate-800">{item.desc}</p>
-
-      {item.isSupport && showMessage && (
-        <div className="absolute -top-16 left-0 right-0 bg-blue-600 text-white font-bold p-2 rounded-xl shadow-2xl z-50 animate-pulse text-[20px] text-center">
-          «همکارِ ۲۴ ساعته تو، همیشه بیداریم!»
+          <p className="font-bold text-blue-950 text-sm">{pro.desc}</p>
         </div>
-      )}
-    </div>
-  ))}
-</div>
- </div>
-    {/* کارت ۲: ویدیوی آپارات */}
-    <div className="bg-black rounded-3xl overflow-hidden shadow-xl border border-white/10">
-      <iframe 
-        className="w-full h-48" 
-        src="https://www.aparat.com/video/video/embed/videohash/atqvi67/vt/frame"  
-        allowFullScreen
-      ></iframe>
-      <div className="p-4 text-white text-center font-bold">دموی ویدیویی</div>
-    </div>
+        <button onClick={() => setSelectedProject(pro)} className="w-full py-3 mt-6 rounded-xl border-2 border-amber-500 font-bold bg-amber-500 text-white transition-all">
+          مشاهده جزئیات
+        </button>
+      </motion.div>
+    ))}
 
-    {/* کارت ۳: پروژه بزودی */}
-    <div className="h-full bg-white/5 rounded-3xl border border-white/10 flex flex-col items-center justify-center hover:bg-blue-800 transition-all cursor-pointer">
-      <span className="text-xl font-bold mb-2">پروژه ۳</span>
-      <span className="text-sm opacity-70">بزودی...</span>
-    </div>
+    {/* کارت ۳: تور شاهو */}
+{/* کارت ۳: تور شاهو */}
+<motion.div whileHover={{ scale: 1.05 }} className="h-full bg-white rounded-3xl border border-slate-200 shadow-lg p-6 flex flex-col overflow-hidden">
+  <h3 className="text-xl font-bold text-blue-950 mb-4 text-center">گالری پروژه تور گردشگری شاهو</h3>
+  
+  {/* تعریف آرایه تصاویر شاهو تور برای استفاده همزمان در سوییپر و لایت‌باکس */}
+  {(() => {
+    const shahoSlides = [
+      { src: '/shahoo1.png', title: 'تور گردشگری شاهو', text: 'دموی اولیه - صفحه اصلی' },
+      { src: '/shahoo2.png', title: 'تور ایرانگردی شاهو', text: 'مناطق زیبای ایران' },
+      { src: '/shahoo3.png', title: 'تورهای خارجی شاهو', text: 'تورهای جهانگردی' },
+      { src: '/shahoo4.png', title: 'فرم رزرو', text: 'فرم رزرو سریع شاهو' },
+      { src: '/shahoo5.png', title: 'گالری عکس', text: 'گالری عکس شاهو از مناطق زیبا' },
+      { src: '/shahoo6.png', title: 'هیجان با شاهو', text: 'تجربه هیجان و لذت' },
+      { src: '/shahoo7.png', title: 'آفر ویژه شاهو', text: 'آفرهای ویژه و اقتصادی شاهو' },
+      { src: '/shahoo8.png', title: 'درباره شاهو', text: 'تجربیات شاهو' },
+      { src: '/shahoo9.png', title: 'ارتباط با ما', text: 'راه های ارتباطی با شاهو' },
+      { src: '/shahoo10.png', title: 'تیم شاهو', text: 'کارشناسان شاهو' },
+      { src: '/shahoo11.png', title: 'آفرهای خارجی شاهو', text: 'رزرو تورهای خارجی' }
+    ];
 
+    return (
+      <>
+        <Swiper 
+          modules={[Navigation, Pagination]} 
+          navigation 
+          pagination={{ clickable: true }} 
+          className="w-full h-auto rounded-2xl"
+        >
+          {shahoSlides.map((item, idx) => (
+            <SwiperSlide 
+              key={idx} 
+              className="pb-8 cursor-pointer" 
+              onClick={() => { 
+                setIndexShaho(idx); 
+                setOpenShaho(true); 
+              }}
+            >
+              <div className="flex flex-col">
+                <img src={item.src} alt={item.title} className="w-full h-48 object-cover rounded-2xl" />
+                <div className="mt-3 text-right p-2">
+                  <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
+                  <p className="text-slate-600 text-xs mt-1">{item.text}</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* لایت‌باکس اصلاح شده: حالا اسلایدها دقیقاً همان تصاویر بالا را مپ می‌کنند */}
+        <Lightbox 
+          open={openShaho} 
+          close={() => setOpenShaho(false)} 
+          index={indexShaho} 
+          controller={{ closeOnBackdropClick: true }}
+          on={{ view: ({ index }) => setIndexShaho(index) }} // آپدیت وضعیت ایندکس هنگام ورق زدن در لایت‌باکس
+          slides={shahoSlides.map(slide => ({ src: slide.src }))} 
+        />
+      </>
+    );
+  })()}
+</motion.div>
   </div>
 </section>
+
+
 
 {/* سکشنِ بعدی سوالات */}
 
@@ -546,6 +564,7 @@ const handleContactSubmit = async (e: any) => {
   e.preventDefault();
   try {
     // ۱. ارسال ایمیل
+  
     await emailjs.send(
       'service_4404k4a', 
       'template_ei26ocg', 
@@ -655,7 +674,7 @@ const handleContactSubmit = async (e: any) => {
   <div className="flex flex-col gap-4 animate-in slide-in-from-bottom-10 fade-in zoom-in duration-300">
     
     {/* واتس‌اپ */}
-    <a href="https://wa.me/..." target="_blank" className="group relative flex items-center justify-end">
+    <a href="https://wa.me/989194077618" target="_blank" className="group relative flex items-center justify-end">
       <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط واتس‌اپ</span>
       <div className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
         <IoLogoWhatsapp size={30} color="white" />
@@ -663,7 +682,7 @@ const handleContactSubmit = async (e: any) => {
     </a>
 
     {/* تلگرام */}
-    <a href="https://telegram.me/..." target="_blank" className="group relative flex items-center justify-end">
+    <a href="https://telegram.me/@myproweb56" target="_blank" className="group relative flex items-center justify-end">
       <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط تلگرام</span>
       <div className="w-14 h-14 bg-[#3E99D8] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
         <SiTelegram size={30} color="white" />
@@ -671,7 +690,7 @@ const handleContactSubmit = async (e: any) => {
     </a>
 
     {/* روبیکا */}
-    <a href="https://rubika.ir/..." target="_blank" className="group relative flex items-center  justify-end">
+    <a href="https://rubika.ir/@gloriiia" target="_blank" className="group relative flex items-center  justify-end">
       <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط روبیکا</span>
       <div className="w-14 h-14 !bg-[#A92078] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
@@ -681,7 +700,7 @@ const handleContactSubmit = async (e: any) => {
     </a>
     
 {/* لینکدین */}
-    <a href="https://linkedin.com/in/your_profile" target="_blank" className="group relative flex items-center justify-end">
+    <a href="https://linkedin.com/in/azam-heshmati-b6604b141" target="_blank" className="group relative flex items-center justify-end">
       <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط در لینکدین</span>
       <div className="w-14 h-14 bg-[#0A66C2] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
         <FaLinkedin size={30} color="white" />
@@ -748,67 +767,113 @@ const handleContactSubmit = async (e: any) => {
   </button>
 </form>
  <CommentList />
- 
     </div>
   </div>
-  
-</section>
+  </section>
+{/* مودالِ مشاوره رایگان بدون محاسبات ه */}
+{isProjectModalOpen && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" dir="rtl">
+    {/* بک‌دراپ */}
+    <div 
+      className="absolute inset-0 bg-blue-950/80 backdrop-blur-sm" 
+      onClick={() => setIsProjectModalOpen(false)}
+    ></div>
+   
+    
+    <div className="relative bg-white w-full max-w-md p-8 rounded-[2rem] shadow-2xl">
+      <h3 className="text-2xl font-black text-blue-950 mb-4 text-right">دریافت مشاوره رایگان</h3>
+      {/* دکمه ضربدر با موقعیت‌دهی منفی برای قرارگیری روی لبه */}
+      <button 
+        onClick={() => setIsProjectModalOpen(false)}
+        className="absolute -top-10 -right-10 bg-white border-2 border-slate-200 text-slate-500 p-2 rounded-full shadow-lg hover:text-blue-950 hover:border-blue-950 transition-all z-10"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div className="space-y-4">
+        <input 
+          type="text" 
+          placeholder="نام کسب وکار.." 
+          value={restaurantName} 
+          onChange={(e) => setRestaurantName(e.target.value)} 
+          className="w-full p-4 bg-slate-100 rounded-xl border border-slate-200 text-right" 
+        />
+        <input 
+          type="tel" 
+          placeholder="شماره تماس..." 
+          dir="ltr" 
+          value={userPhone} 
+          onChange={(e) => setUserPhone(e.target.value)} 
+          className="w-full p-4 bg-slate-100 rounded-xl border border-slate-200 text-right" 
+        />
+        
+        <button 
+onClick={() => {
+  // این نام‌ها باید دقیقاً با قالب EmailJS یکی باشند
+  const templateParams = {
+    name: restaurantName,      // به جای restaurant_name
+    message: userPhone,        // به جای phone
+    time: new Date().toLocaleString('fa-IR') // اضافه کردن زمان برای پر شدن متغیر time
+  };
+            emailjs.send(
+              'service_4404k4a', 
+              'template_an9us09', 
+              templateParams, 
+              'iU4RrJwUhH5MO3M7X'
+            )
+            .then(() => { 
+              alert("با موفقیت ارسال شد."); 
+              setRestaurantName("");
+              setUserPhone("");
+              setIsProjectModalOpen(false); // بستن مودال پس از موفقیت
+            })
+            .catch((error) => {
+              console.error("EmailJS Error:", error);
+              alert("خطا در ارسال اطلاعات. لطفاً دوباره تلاش کنید.");
+            });
+          }}
+          className="w-full py-4 bg-cyan-500 text-white font-black rounded-xl hover:bg-cyan-600 transition-all"
+        >
+          ثبت درخواست
+        </button>
+      </div>
 
-<footer className= "bg-blue-950 text-white py-16 px-8">
-  <div id="servises"    className="max-w-6xl mx-auto grid md:grid-cols-3 gap-15">
-        {/* ستون اول: درباره ما */}
-    <div className="space-y-4">
-      <h3 className="text-2xl font-black text-amber-500">هوشمندسازی</h3>
-      <p className="text-slate-300 text-sm leading-relaxed">
-       
-        «MyProWeb ؛ جایی که اعدادِ رستورانِ شما، به زبانِ سود صحبت می‌کنند.» . ما با ترکیب هوش مصنوعی و اتوماسیون اکسل، فرآیندهای کسب‌کار شما را سریع‌تر، دقیق‌تر و هوشمندتر می‌کنیم. با یک کلیک بر روی دکمه زیر رایگان زمان هدر رفته را  محاسبه کنید .
-      </p>
-              <button 
-  onClick={() => setIsTimeModalOpen(true)}
- className="bg-amber-500 text-white px-3 py-2.5 rounded-full font-black hover:bg-blue-950 transition-all shadow-lg"
->
- ماشین‌حسابِ زمان از دست رفته
-</button>
-    </div>
 
-    {/* ستون دوم: لینک‌های سریع */}
-    <div className="space-y-4">
-      <h4 className="font-bold text-lg">دسترسی سریع</h4>
-      <ul className="space-y-2 text-slate-300 text-sm">
-        <li><a href="#" className="hover:text-amber-500 transition-colors">مشاوره رایگان</a></li>
-        <li><a href="#" className="hover:text-amber-500 transition-colors">نمونه پروژه‌های اکسل</a></li>
-        <li><a href="#" className="hover:text-amber-500 transition-colors">سوالات متداول</a></li>
-      </ul>
-    </div>
-
-    {/* ستون سوم: تماس با ما */}
-    <div className="space-y-4">
-      <h4 className="font-bold text-lg">تماس با ما</h4>
-      <ul className="space-y-2 text-slate-300 text-sm">
-        <li>ایمیل: info@yourdomain.com</li>
-        <li>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</li>
-        <li className="pt-2 flex gap-4">
-          <a href="#" target="_blank" className="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center hover:bg-amber-500 transition-colors cursor-pointer">
-            <Send size={16} />
-          </a>
-          <a href="#" target="_blank" className="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center hover:bg-amber-500 transition-colors cursor-pointer">
-            <MessageCircle size={16} />
-          </a>
-        </li>
-      </ul>
     </div>
   </div>
+)}
+{selectedProject && (
+  <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
+    {/* تغییرات اصلی: استفاده از max-h-[90vh] و max-w-2xl */}
+    <div className="bg-white p-6 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+      
+      {/* هدر مودال */}
+      <div className="flex justify-between items-center mb-4 flex-shrink-0">
+        <h2 className="text-xl font-black truncate">{selectedProject.title}</h2>
+        <button onClick={() => setSelectedProject(null)} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">✕</button>
+      </div>
+      
+      {/* کانتینر ویدیو - کمی کوچک‌تر */}
+      <div className="w-full h-48 md:h-64 rounded-2xl overflow-hidden mb-4 bg-black flex-shrink-0">
+        <video 
+          src={selectedProject.video} 
+          controls 
+          className="w-full h-full object-contain"
+        />
+      </div>
+      
+      {/* توضیحات با اسکرول داخلی که از کادر بیرون نزند */}
+      <div className="overflow-y-auto flex-grow pr-2">
+        <p className="text-base text-slate-600 leading-relaxed whitespace-pre-line">
+          {selectedProject.fullDetail}
+        </p>
+      </div>
 
-  {/* کپی‌رایت */}
-    <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-blue-900 text-center text-slate-500 text-xs">
-  
-    تمامی حقوق این سایت متعلق به «هوشمندسازی» است. ۱۴۰۵ ©
+    </div>
   </div>
-
-
-</footer>
-
-
+)}
+<Footer setIsTimeModalOpen={setIsTimeModalOpen} />
 </main>
 );
 }
