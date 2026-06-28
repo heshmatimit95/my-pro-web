@@ -785,7 +785,7 @@ const projects = [
       {/* دکمه ضربدر با موقعیت‌دهی منفی برای قرارگیری روی لبه */}
       <button 
         onClick={() => setIsProjectModalOpen(false)}
-        className="absolute -top-10 -right-10 bg-white border-2 border-slate-200 text-slate-500 p-2 rounded-full shadow-lg hover:text-blue-950 hover:border-blue-950 transition-all z-10"
+        className="absolute -top-70 -right-10 bg-white border-2 border-slate-200 text-slate-500 p-2 rounded-full shadow-lg hover:text-blue-950 hover:border-blue-950 transition-all z-10"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />

@@ -103,7 +103,7 @@ const message = `\u200F🚨  myproweb سفارش جدید
                   
                   <button disabled={isSubmitting || !isPhoneValid} type="submit" 
                     className={`w-full py-4 rounded-2xl font-black transition-all ${isPhoneValid ? 'bg-green-500 text-white' : 'bg-slate-300'}`}>
-                    {isSubmitting ? "در حال ثبت..." : "ثبت نهایی درخواست در واتس‌اپ"}
+                    {isSubmitting ? "در حال ثبت..." : "ثبت نهایی درخواست "}
                   </button>
                   <button type="button" onClick={() => setStep(2)} className="w-full text-blue-400 font-bold">بازگشت به پلن‌ها</button>
                 </motion.form>
