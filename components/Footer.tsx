@@ -70,7 +70,7 @@ export default function Footer({ setIsTimeModalOpen }: any) {
       src="https://trustseal.enamad.ir/logo.aspx?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe" 
       alt="اینماد" 
       style={{ cursor: 'pointer' }} 
-      className="w-16 h-16 object-contain bg-white rounded-lg p-1" // این کلاس‌ها را حتماً اضافه کن
+      className="w-12 h-12 object-contain bg-white rounded-lg p-1" // این کلاس‌ها را حتماً اضافه کن
     />
   </a>
 </div>
