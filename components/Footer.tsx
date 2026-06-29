@@ -10,7 +10,7 @@ export default function Footer({ setIsTimeModalOpen }: any) {
         
         {/* ستون اول: معرفی (سمت راست) */}
         <div className="space-y-4">
-          <h3 className="text-2xl font-black text-amber-500">هوشمندسازی پرو وب؛ راهکار جامع خودکارسازی کسب‌ وکارها</h3>
+          <h3 className="text-2xl font-black text-amber-500">هوشمندسازی مای پرو وب؛ راهکار جامع خودکارسازی کسب‌ وکارها</h3>
           <p className="text-slate-300 text-sm leading-relaxed">
             MyProWeb؛ جایی که اعداد رستوران شما، به زبان سود صحبت می‌کنند. ما با ترکیب هوش مصنوعی و اتوماسیون اکسل، فرآیندهای کسب‌وکار شما را سریع‌تر، دقیق‌تر و هوشمندتر می‌کنیم. با یک کلیک بر روی دکمه زیر رایگان زمان هدر رفته را محاسبه کنید.
           </p>
@@ -82,7 +82,7 @@ export default function Footer({ setIsTimeModalOpen }: any) {
 
       {/* کپی‌رایت */}
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-blue-900 text-center text-slate-300 text-xs">
-        تمامی حقوق این سایت متعلق به «هوشمندسازی پرو وب» است. ۱۴۰۵ ©
+        تمامی حقوق این سایت متعلق به «هوشمندسازی مای پرو وب» است. ۱۴۰۵ ©
      
       </div>
     
