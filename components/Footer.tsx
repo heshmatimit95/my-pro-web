@@ -58,21 +58,22 @@ export default function Footer({ setIsTimeModalOpen }: any) {
 
 <p>برای دسترسی به شبکه‌های اجتماعی روی علامت مثبت کلیک کنید.</p>
       </div>
-      <div className="flex justify-center mt-4">
-        <a 
-          referrerPolicy="origin" 
-          target="_blank" 
-          href="https://trustseal.enamad.ir/?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe"
-        >
-          <img 
-            referrerPolicy="origin" 
-            src="https://trustseal.enamad.ir/logo.aspx?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe" 
-            alt="اینماد" 
-            style={{ cursor: 'pointer' }} 
-            className="w-24 h-24" // می‌توانید سایز را اینجا تغییر دهید
-          />
-        </a>
-      </div>
+{/* کانتینر برای مدیریت بهتر موقعیت لوگو */}
+<div className="flex items-center justify-start mt-4">
+  <a 
+    referrerPolicy="origin" 
+    target="_blank" 
+    href="https://trustseal.enamad.ir/?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe"
+  >
+    <img 
+      referrerPolicy="origin" 
+      src="https://trustseal.enamad.ir/logo.aspx?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe" 
+      alt="اینماد" 
+      style={{ cursor: 'pointer' }} 
+      className="w-24 h-24 object-contain bg-white rounded-lg p-1" // این کلاس‌ها را حتماً اضافه کن
+    />
+  </a>
+</div>
  </div>
        
         </div>
