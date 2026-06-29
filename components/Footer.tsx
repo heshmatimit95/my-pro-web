@@ -1,5 +1,8 @@
+'use client'
+import { useEffect } from 'react';
 import Link from 'next/link';
 export default function Footer({ setIsTimeModalOpen }: any) {
+
   return (
     <footer className="bg-[#0b2447] text-white py-16 px-8">
       {/* ساختار گرید ۳ ستونه که ستون وسط را دقیقاً مدیریت می‌کند */}
@@ -60,11 +63,32 @@ export default function Footer({ setIsTimeModalOpen }: any) {
         </div>
 
       </div>
+      <div className="flex justify-center mt-4">
+        <a 
+          referrerPolicy="origin" 
+          target="_blank" 
+          href="https://trustseal.enamad.ir/?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe"
+        >
+          <img 
+            referrerPolicy="origin" 
+            src="https://trustseal.enamad.ir/logo.aspx?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe" 
+            alt="اینماد" 
+            style={{ cursor: 'pointer' }} 
+            className="w-24 h-24" // می‌توانید سایز را اینجا تغییر دهید
+          />
+        </a>
+      </div>
 
       {/* کپی‌رایت */}
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-blue-900 text-center text-slate-300 text-xs">
         تمامی حقوق این سایت متعلق به «هوشمندسازی پرو وب» است. ۱۴۰۵ ©
+     
       </div>
+    
+ 
+
     </footer>
   );
 }
+
+
