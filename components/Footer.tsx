@@ -57,11 +57,6 @@ export default function Footer({ setIsTimeModalOpen }: any) {
             <p>شماره تماس: ۰۹۱۹۱۲۹۴۰۶۸</p>
 
 <p>برای دسترسی به شبکه‌های اجتماعی روی علامت مثبت کلیک کنید.</p>
-
- </div>
-       
-        </div>
-
       </div>
       <div className="flex justify-center mt-4">
         <a 
@@ -78,6 +73,11 @@ export default function Footer({ setIsTimeModalOpen }: any) {
           />
         </a>
       </div>
+ </div>
+       
+        </div>
+
+
 
       {/* کپی‌رایت */}
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-blue-900 text-center text-slate-300 text-xs">
