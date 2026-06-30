@@ -319,7 +319,7 @@ const handleFormSubmit = async (formData: any) => {
         </div>
 
         {/* بخش متون کارت با اصلاح سایز فونت برای موبایل و دسکتاپ */}
-        <h3 className="text-lg md:text-medium font-bold text-blue-950 truncate">
+        <h3 className="text-medium md:text-sm font-bold text-blue-950 truncate">
           {pro.title}
         </h3>
 
