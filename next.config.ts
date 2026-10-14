@@ -1,16 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/(.*)', // اعمال روی تمام صفحات
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-        ],
-      },
-    ];
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  // اگر مشکلی در بیلد داشتی، این خط را کامنت کن یا بردار
+  // output: 'export', 
+  
+  // تنظیم برای بهینه‌سازی تصاویر در لیارا
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+    ],
   },
 };
-module.exports = nextConfig;
+
+export default nextConfig;

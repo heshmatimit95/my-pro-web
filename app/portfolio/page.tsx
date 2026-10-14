@@ -23,6 +23,8 @@ const projects = [
     title: "سیستم هوشمند مدیریت رستوران (اصیل)", 
     desc: "اتوماسیون کامل سفارشات آنلاین، سالن و آشپزخانه", 
     video: "/asil.mp4", 
+    liveLink: "https://asilfood.ir", 
+    liveLinkLabel: "مشاهده نسخه دمو و تست پنل کاربری",
     fullDetail: `مدیریت هم‌زمان و مانیتورینگ دقیق فرآیندها، چالش اصلی رستوران‌های بزرگ و زنجیره‌ای است. این سیستم یک پلتفرم اتوماسیون جامع است که تمام بخش‌های عملیاتی را یکپارچه می‌کند.
 
 قابلیت‌های کلیدی سیستم:
@@ -35,18 +37,19 @@ const projects = [
   },
   { 
     id: 2, 
-    title: "    دموی اولیه وب‌سایت تور گردشگری شاهو ", 
-    desc: "مدیریت داینامیک پکیج‌های مسافرتی و فروش آنلاین تور", 
-    video: "shaho3.mp4",
+    title: "پلتفرم گردشگری شاهو تور", 
+    desc: "رزرو آنلاین تورهای داخلی، طبیعت‌گردی و اقامتگاه", 
+    video: "/shaho3.mp4",
+    liveLink: "https://shahotour.ir",
     fullDetail: `در صنعت گردشگری، ارائه اطلاعات شفاف و فرآیند رزرو سریع، کلید تبدیل بازدیدکننده به مشتری است. وب‌سایت شاهو یک پلتفرم پویا برای معرفی، مدیریت و فروش پکیج‌های تور داخلی و خارجی است.
 
 قابلیت‌های کلیدی سیستم:
-🔹     دموی اولیه مدیریت داینامیک تورها: امکان تعریف پکیج‌های مسافرتی، زمان‌بندی حرکت، ظرفیت هتل‌ها و نرخ‌گذاری هوشمند بر اساس فصول.
+🔹   دموی اولیه مدیریت داینامیک تورها: امکان تعریف پکیج‌های مسافرتی، زمان‌بندی حرکت، ظرفیت هتل‌ها و نرخ‌گذاری هوشمند بر اساس فصول.
 🔹 درگاه پرداخت و ررزواسیون آنلاین: فرآیند کاملاً خودکار ثبت‌نام مسافران، تایید مدارک و صدور آنی بلیط و واچر هتل.
 🔹 پنل کاربری تخصصی: فضای اختصاصی برای مسافران جهت پیگیری سوابق سفرها، تراکنش‌های مالی و دریافت اطلاعیه‌های سفر.
 
 این پروژه یک راهکار فول‌استک برای آژانس‌های مسافرتی است که زنجیره فروش سنتی را به یک موتور درآمدزایی آنلاین تبدیل می‌کند.`, 
-    color: "from-sky-500 to-cyan-700" 
+    color: "from-green-500 to-emerald-700",
   },
   { 
     id: 3, 
@@ -103,7 +106,7 @@ const projects = [
     id: 7, 
     title: "گزارش تحلیلی فروش و زنجیره تأمین شرکت پخش دارو", 
     desc: "کنترل موجودی هوشمند و تحلیل زنجیره تأمین دارو", 
-    video: "/داشبورد فروش.mp4", 
+    video: "/pharma-sales.mp4", 
     fullDetail: `در صنایع حساس مانند پخش و توزیع دارو، مدیریت دقیق زنجیره تأمین و پیش‌بینی تقاضا اهمیت حیاتی دارد. این داشبورد تحلیلی ابزاری قدرتمند برای پایش لحظه‌ای فرآیندهای فروش و بهینه‌سازی انبارداری است.
 
 قابلیت‌های کلیدی این سیستم:
@@ -117,8 +120,8 @@ const projects = [
   { 
     id: 8, 
     title: "داشبورد داینامیک مانیتورینگ عملکرد مراکز فروش (Sales Performance Dashboard)", 
-    desc: "پایش هوشمند عملکرد، تحلیل روندها و رتبه‌بندی خودکار مراکز", 
-    video: "/نمودارهای داینامیک.mp4", 
+    desc: "پایش هوشمند عملکرد, تحلیل روندها و رتبه‌بندی خودکار مراکز", 
+    video: "/sales-performance.mp4", 
     fullDetail: ` ارزیابی دقیق و سریع عملکرد دفاتر و مراکز فروش یک ضرورت است. این داشبورد تخصصی به جای گزارش‌های متنی و سنتی طولانی، وضعیت سلامت عملیاتی و بازدهی هر مرکز را در یک نگاه به تصویر می‌کشد.
 
 قابلیت‌های کلیدی این سیستم:
@@ -129,20 +132,20 @@ const projects = [
 این سیستم با حذف فرآیندهای تحلیل دستی، سرعت و دقت تصمیم‌گیری مدیران ارشد را در مدیریت شبکه و خدمات به شدت افزایش داده است.`, 
     color: "from-green-500 to-emerald-700" 
   },
-{ 
-  id: 9, 
-  title: "سیستم هوشمند و داینامیک انبارداری", 
-  desc: "مدیریت زنجیره تأمین، پایش لحظه‌ای موجودی و کنترل کسری کالا", 
-  video: "coming-soon", // به جای آدرس ویدیو، این کلمه کلیدی را بگذار
-  fullDetail: `مدیریت دقیق و بهینه انبار، قلب تپنده بخش عملیات و فروش هر کسب‌وکار است. این سیستم انبارداری داینامیک ابزاری هوشمند برای کنترل متمرکز، دقیق و لحظه‌ای گردش کالا در سازمان است.
+  { 
+    id: 9, 
+    title: "سیستم هوشمند و داینامیک انبارداری", 
+    desc: "مدیریت زنجیره تأمین، پایش لحظه‌ای موجودی و کنترل کسری کالا", 
+    video: "coming-soon", 
+    fullDetail: `مدیریت دقیق و بهینه انبار، قلب تپنده بخش عملیات و فروش هر کسب‌وکار است. این سیستم انبارداری داینامیک ابزاری هوشمند برای کنترل متمرکز، دقیق و لحظه‌ای گردش کالا در سازمان است.
 قابلیت‌های کلیدی این سیستم:
 🔹 کنترل پویای موجودی: پایش آنلاین و خودکار وضعیت کالاهای ورودی و خروجی جهت بهینه‌سازی حجم انبارداری.
 🔹 هشدار خودکار کسری کالا: سیستم هوشمند نقطه‌ سفارش (Reorder Point) برای جلوگیری از اتمام ناگهانی اقلام استراتژیک.
 🔹 گزارش‌گیری و نمودارهای داینامیک: بصری‌سازی وضعیت انبار و سرعت گردش کالا جهت تصمیم‌گیری‌های مالی و تأمین بهینه.
 
 این پروژه فرآیندهای سنتی و دستی انبارداری را به یک سیستم کاملاً مکانیزه و قابل اطمینان تبدیل می‌کند تا بهره‌وری زنجیره تأمین به حداکثر برسد.`, 
-  color: "from-green-500 to-emerald-700" 
-}
+    color: "from-green-500 to-emerald-700" 
+  }
 ];
 
 const handleFormSubmit = async (formData: any) => {
@@ -159,8 +162,39 @@ const handleFormSubmit = async (formData: any) => {
     alert("خطا: " + result.error);
   }
 };
+ 
+ const VideoSchemas = () => {
+  const schemas = projects
+    .filter(p => p.video && p.video !== "coming-soon")
+    .map(p => ({
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": p.title,
+      "description": p.desc,
+      "thumbnailUrl": [`https://myproweb.ir/thumbnails/${p.video.replace('/', '')}`.replace('.mp4', '.jpg')],
+      "uploadDate": "2026-07-12T12:00:00+03:30",
+      "contentUrl": `https://myproweb.ir${p.video}`,
+      "embedUrl": "https://myproweb.ir/"
+    }));
+
   return (
+    <>
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
+  );
+};
+ return (
 <main className="min-h-screen bg-slate-50" dir="rtl">
+<div>
+    <VideoSchemas /> {/* کدهای سئو ویدیوها اینجا رندر می‌شوند */}
+    {/* بقیه المان‌های چیدمان پورتفولیوی تو */}
+  </div>
       {/* هدر */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-md border-b border-slate-200">
         <nav className="max-w-6xl mx-auto px-8 py-4 flex justify-between items-center">
@@ -272,72 +306,80 @@ const handleFormSubmit = async (formData: any) => {
     </section>
  
 {/* بخش کارت‌های انیمیشنی */}
+{/* بخش کارت‌های انیمیشنی */}
 <section id="projects" className="max-w-6xl mx-auto py-10 px-6">
-  {/* عنوان بخش پورتفولیو */}
-  <h2 className="text-3xl md:text-4xl font-black text-center mb-16 text-blue-950">
-    پروژه‌های من
-  </h2>
+      <h2 className="text-3xl md:text-4xl font-black text-center mb-16 text-blue-950">
+        پروژه‌های من
+      </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    {projects.map((pro) => (
-      <motion.div 
-        key={pro.id} 
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="group bg-slate-50 rounded-3xl p-6 shadow-lg border border-slate-300 hover:shadow-3xl transition-all duration-500"
-      >
-        {/* بخش ویدیو یا گرادینت به‌زودی */}
-        <div className={`h-40 rounded-2xl mb-6 overflow-hidden relative ${pro.video !== "coming-soon" && !pro.video ? `bg-gradient-to-tr ${pro.color}` : ""}`}>
-          
-          {/* حالت اول: اگر ویدیو در حال آماده‌سازی بود */}
-          {pro.video === "coming-soon" ? (
-            <div className={`w-full h-full bg-gradient-to-tr ${pro.color} flex flex-col items-center justify-center p-4 text-center relative`}>
-              {/* یک لایه تیره ملایم برای خوانایی فوق‌العاده متن روی هر نوع گرادینتی */}
-              <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]"></div>
-              
-              <span className="text-base md:text-lg font-bold text-white z-10 animate-bounce flex items-center gap-1">
-                ⏳ به‌زودی...
-              </span>
-              <p className="text-[11px] md:text-xs text-slate-100/90 mt-1 z-10 font-medium leading-relaxed">
-                ویدیو این پروژه در حال آماده‌سازی است
-              </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {projects.map((pro) => (
+          <motion.div 
+            key={pro.id} 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group bg-slate-50 rounded-3xl p-6 shadow-lg border border-slate-300 hover:shadow-3xl transition-all duration-500"
+          >
+            {/* بخش ویدیو */}
+            <div className={`h-40 rounded-2xl mb-6 overflow-hidden relative ${pro.video !== "coming-soon" && !pro.video ? `bg-gradient-to-tr ${pro.color}` : ""}`}>
+              {pro.video === "coming-soon" ? (
+                <div className={`w-full h-full bg-gradient-to-tr ${pro.color} flex flex-col items-center justify-center p-4 text-center relative`}>
+                  <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]"></div>
+                  <span className="text-base md:text-lg font-bold text-white z-10 animate-bounce flex items-center gap-1">
+                    ⏳ به‌زودی...
+                  </span>
+                </div>
+              ) : pro.video && pro.video.trim() !== "" ? (
+                /* تغییر اصلی در این خط: اضافه شدن اتریبیوت poster به صورت کاملاً داینامیک */
+                <video 
+                  src={pro.video} 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline 
+                  poster={`/thumbnails/${pro.video.replace('/', '').replace('.mp4', '.jpg')}`}
+                  className="w-full h-full object-cover" 
+                />
+              ) : (
+                <div className="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity"></div>
+              )}
             </div>
-          ) : pro.video && pro.video.trim() !== "" ? (
-            /* حالت دوم: اگر آدرس ویدیو موجود بود */
-            <video 
-              src={pro.video} 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              className="w-full h-full object-cover" 
-            />
-          ) : (
-            /* حالت سوم: اگر کلاً فیلد ویدیو خالی یا ناموجود بود */
-            <div className="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity"></div>
-          )}
-        </div>
 
-        {/* بخش متون کارت با اصلاح سایز فونت برای موبایل و دسکتاپ */}
-        <h3 className="text-medium md:text-base font-bold text-blue-950 truncate">
-          {pro.title}
-        </h3>
+            <h3 className="text-medium md:text-base font-bold text-blue-950 truncate">{pro.title}</h3>
+            <p className="text-sm md:text-sm text-slate-600 mt-2 mb-6 line-clamp-2">{pro.desc}</p>
 
-        <p className="text-sm md:text-sm text-slate-600 mt-2 mb-6 line-clamp-2">
-          {pro.desc}
-        </p>
+            {/* بخش دکمه‌ها */}
+            <div className="flex flex-col gap-3">
+              <button 
+                onClick={() => setSelectedProject(pro)} 
+                className="w-full py-2.5 rounded-xl border-2 border-amber-500 font-bold hover:bg-amber-500 hover:text-white text-amber-600 transition-all text-base"
+              >
+                مشاهده جزئیات
+              </button>
 
-        {/* دکمه اکشن باز کردن مودال جزئیات */}
-        <button 
-          onClick={() => setSelectedProject(pro)} 
-          className="w-full py-2.5 md:py-3 rounded-xl border-2 border-amber-500 font-bold hover:bg-amber-500 hover:text-white text-amber-600 transition-all text-base tracking-tight"
-        >
-          مشاهده جزئیات
-        </button>
-      </motion.div>
-    ))}
-  </div>
-</section>
+              {/* نمایش دکمه دمو فقط اگر liveLink در دیتای پروژه وجود داشته باشد */}
+              {pro.liveLink && (
+                <a 
+                  href={pro.liveLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-blue-950 text-white font-bold hover:opacity-90 transition-all text-center text-sm shadow-md"
+                >
+                  🚀 مشاهده دموی زنده
+                </a>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+
+
+
+
+
+
+
 
 <section className="py-20 bg-white" dir="rtl">
   <div className="max-w-4xl mx-auto px-8">
