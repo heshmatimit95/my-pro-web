@@ -1,20 +1,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-// اتصال به دیتابیس
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
+import { getSupabase } from '@/lib/supabase'
 export default function CommentList() {
   const [comments, setComments] = useState<any[]>([]);
 
   useEffect(() => {
     async function fetchComments() {
-      const { data, error } = await supabase
+      const { data, error } = await  getSupabase()
         .from('comments')
         .select('*')
         .eq('is_approved', true) 

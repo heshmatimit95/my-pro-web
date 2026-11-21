@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { getSupabase } from "@/lib/supabase";
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { Send, MessageCircle, Home as HomeIcon, FolderKanban, TrendingUp } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import CommentList from '../CommentList';
@@ -18,12 +18,6 @@ import 'swiper/css/pagination';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-
-// اتصال به Supabase
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 export default function ContactHeader() {
   // هوک‌ها (Hooks) حتماً در ابتدای تابع
   const [loading, setLoading] = useState(false);
@@ -61,7 +55,7 @@ const [indexShaho, setIndexShaho] = useState(0);
     const name = e.target.name.value;
     const message = e.target.message.value;
 
-    const { error } = await supabase.from('comments').insert([{ name, message }]);
+    const { error } = await getSupabase().from('contacts').insert([{ name, message }]);
     
     if (error) {
       alert("خطا در ثبت: " + error.message);
@@ -78,7 +72,7 @@ const handleContactSubmit = async (e: any) => {
   setLoading(true);
 
   // ۱. اول عملیات ذخیره در Supabase
-  const { error: dbError } = await supabase
+  const { error: dbError } = await getSupabase()
     .from('contacts')
     .insert([
       { 
@@ -124,7 +118,7 @@ const projects = [
     id: 1, 
     title:"داشبورد هوشمند ارزی و مالی اکسل",
     desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان",
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292133/gold-3.mp4", 
+    video: "/gold-3.mp4", 
     fullDetail:`داشبورد مدیریتی در اکسل با قابلیت وب‌اسکرپینگ و دریافت لحظه‌ای نرخ دلار و طلا. این پروژه مجهز به موتور تحلیل هوشمند (باکس بنفش تایپ متحرک)، آرشیو خودکار سوابق قیمت و معماری منحصربه‌فرد مولتی‌لنگوئیج است که کل محیط داشبورد، چیدمان فیزیکی باکس‌ها (Mirroring) و نمودارها را به صورت آنی بین ۴ زبان فارسی، انگلیسی، فرانسه و آلمانی سوئیچ می‌کند.`, 
     color: "from-amber-500 to-orange-600" 
   },
@@ -571,7 +565,7 @@ const projects = [
     // حتماً مطمئن شوید supabase قبلاً در این فایل تعریف شده است
 // ۲. ذخیره در Supabase
     // حتماً مطمئن شوید supabase قبلاً در این فایل تعریف شده است
-    const { error: dbError } = await supabase
+    const { error: dbError } = await getSupabase()
       .from('contacts')
       .insert([
         { 
