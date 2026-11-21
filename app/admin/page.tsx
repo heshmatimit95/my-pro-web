@@ -1,11 +1,11 @@
-"use client";
-// ../ باعث می‌شود یک سطح به عقب (پوشه app) برگردید
-import ContactList from '../admin/contactlist'; 
+import ContactList from './contactlist'
+
+export const dynamic = 'force-dynamic'
 
 export default function AdminPage() {
   return (
     <div className="p-8">
       <ContactList />
     </div>
-  );
+  )
 }
