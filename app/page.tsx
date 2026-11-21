@@ -47,11 +47,6 @@ const [indexAsil, setIndexAsil] = useState(0);
 const [openShaho, setOpenShaho] = useState(false);
 const [indexShaho, setIndexShaho] = useState(0);
 
-
-
-
-
-
   const services = [
     { title: "توسعه وب‌سایت‌های داینامیک", desc: "طراحی پنل‌های مدیریت رستوران و سامانه‌های اختصاصی.", icon: "🌐" },
     { title: "هوشمندسازی فایل‌های اکسل", desc: "طراحی ماکروهای VBA و داشبوردهای مدیریتی خودکار.", icon: "📊" },
@@ -129,7 +124,7 @@ const projects = [
     id: 1, 
     title:"داشبورد هوشمند ارزی و مالی اکسل",
     desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان",
-    video: "/gold-3.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292133/gold-3.mp4", 
     fullDetail:`داشبورد مدیریتی در اکسل با قابلیت وب‌اسکرپینگ و دریافت لحظه‌ای نرخ دلار و طلا. این پروژه مجهز به موتور تحلیل هوشمند (باکس بنفش تایپ متحرک)، آرشیو خودکار سوابق قیمت و معماری منحصربه‌فرد مولتی‌لنگوئیج است که کل محیط داشبورد، چیدمان فیزیکی باکس‌ها (Mirroring) و نمودارها را به صورت آنی بین ۴ زبان فارسی، انگلیسی، فرانسه و آلمانی سوئیچ می‌کند.`, 
     color: "from-amber-500 to-orange-600" 
   },
