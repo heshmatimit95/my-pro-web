@@ -110,7 +110,7 @@ const projects = [
     title: "سیستم هوشمند مدیریت رستوران (اصیل)", 
     desc: "اتوماسیون کامل سفارشات آنلاین، سالن و آشپزخانه", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292187/asil.mp4", 
-    liveLink: "https://asilfood.ir", 
+    liveLink: "coming-soon", 
     liveLinkLabel: "مشاهده نسخه دمو و تست پنل کاربری",
     fullDetail: `مدیریت هم‌زمان و مانیتورینگ دقیق فرآیندها، چالش اصلی رستوران‌های بزرگ و زنجیره‌ای است. این سیستم یک پلتفرم اتوماسیون جامع است که تمام بخش‌های عملیاتی را یکپارچه می‌کند.
 

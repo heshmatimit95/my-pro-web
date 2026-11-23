@@ -378,16 +378,16 @@ const projects = [
       <h3 className="text-xl font-bold text-blue-950 mb-4 text-center">گالری پروژه رستوران اصیل</h3>
       <Swiper modules={[Navigation, Pagination]} navigation pagination={{ clickable: true }} className="w-full h-auto rounded-2xl">
         {[
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451401/asil1.png', title: 'رستوران اصیل', text: 'صفحه اصلی -دموی اولیه' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil2.png', title: 'رستوران اصیل', text: 'منو غذا' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil3.png', title: 'رستوران اصیل', text: 'منو غذا' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil4.png', title: 'رستوران اصیل', text: 'سبد خرید' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil5.png', title: 'رستوران اصیل', text: 'چاپ فاکتور' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil6.png', title: 'رستوران اصیل', text: 'مدیریت سفارشات' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451394/asil7.png', title: 'رستوران اصیل', text: 'ویرایش سفارشات' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png', title: 'رستوران اصیل', text: 'پنل کاربری' },
-          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png', title: 'رستوران اصیل', text: 'باشگاه مشتریان' },
-        ].map((item, idx) => (
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451401/asil1.png', title: 'رستوران اصیل', text: 'صفحه اصلی -دموی اولیه' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451393/asil2.png', title: 'رستوران اصیل', text: 'منو غذا' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451395/asil3.png', title: 'رستوران اصیل', text: 'منو غذا' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451395/asil4.png', title: 'رستوران اصیل', text: 'سبد خرید' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451393/asil5.png', title: 'رستوران اصیل', text: 'چاپ فاکتور' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451393/asil6.png', title: 'رستوران اصیل', text: 'مدیریت سفارشات' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451394/asil7.png', title: 'رستوران اصیل', text: 'ویرایش سفارشات' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451395/asil8.png', title: 'رستوران اصیل', text: 'پنل کاربری' },
+  { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto/v1795451395/asil9.png', title: 'رستوران اصیل', text: 'باشگاه مشتریان' },
+].map((item, idx) => (
           <SwiperSlide key={idx} className="pb-8 cursor-pointer" onClick={() => { setIndexAsil(idx); setOpenAsil(true); }}>
             <div className="flex flex-col">
               <img src={optImg(item.src, "w_600")} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
