@@ -254,7 +254,7 @@ const projects = [
   </div>
 </section>
 
-<section id="aboutus" className="py-25 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-8">
+<section id="aboutus" className="py-25 bg\gradient-to-t from-blue-950 to-slate-900 text-white px-8">
   {/* اینجا gap-12 را به gap-6 تغییر دادم تا فاصله دو ستون کم شود */}
   <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-0 items-center">
     
@@ -262,7 +262,7 @@ const projects = [
     <div className="flex justify-center md:justify-start md:pl-16 items-center">
       <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-amber-500 overflow-hidden shadow-2xl">
         <img 
-            src="/proweb.jpeg" 
+            src="https://res.cloudinary.com/ljt42uzz/image/upload/v1795451391/proweb.jpg" 
             alt="متخصص هوشمندسازی و وب" 
             className="w-full h-full object-cover"
         />
@@ -310,7 +310,7 @@ const projects = [
 </section>
 
 
-<section id="top" className="py-24 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-4 md:px-8">
+<section id="top" className="py-24 bg\gradient-to-t from-blue-950 to-slate-900 text-white px-4 md:px-8">
   <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-16">پروژه‌های شاخص</h2>
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
     {/* کارت ۱: رستوران اصیل */}
@@ -318,15 +318,15 @@ const projects = [
       <h3 className="text-xl font-bold text-blue-950 mb-4 text-center">گالری پروژه رستوران اصیل</h3>
       <Swiper modules={[Navigation, Pagination]} navigation pagination={{ clickable: true }} className="w-full h-auto rounded-2xl">
         {[
-          { src: '/asil1.png', title: 'رستوران اصیل', text: 'صفحه اصلی -دموی اولیه' },
-          { src: '/asil2.png', title: 'رستوران اصیل', text: 'منو غذا' },
-          { src: '/asil3.png', title: 'رستوران اصیل', text: 'منو غذا' },
-          { src: '/asil4.png', title: 'رستوران اصیل', text: 'سبد خرید' },
-          { src: '/asil5.png', title: 'رستوران اصیل', text: 'چاپ فاکتور' },
-          { src: '/asil6.png', title: 'رستوران اصیل', text: 'مدیریت سفارشات' },
-          { src: '/asil7.png', title: 'رستوران اصیل', text: 'ویرایش سفارشات' },
-          { src: '/asil8.png', title: 'رستوران اصیل', text: 'پنل کاربری' },
-          { src: '/asil9.png', title: 'رستوران اصیل', text: 'باشگاه مشتریان' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451401/asil1.png', title: 'رستوران اصیل', text: 'صفحه اصلی -دموی اولیه' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil2.png', title: 'رستوران اصیل', text: 'منو غذا' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil3.png', title: 'رستوران اصیل', text: 'منو غذا' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil4.png', title: 'رستوران اصیل', text: 'سبد خرید' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil5.png', title: 'رستوران اصیل', text: 'چاپ فاکتور' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil6.png', title: 'رستوران اصیل', text: 'مدیریت سفارشات' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451394/asil7.png', title: 'رستوران اصیل', text: 'ویرایش سفارشات' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png', title: 'رستوران اصیل', text: 'پنل کاربری' },
+          { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png', title: 'رستوران اصیل', text: 'باشگاه مشتریان' },
         ].map((item, idx) => (
           <SwiperSlide key={idx} className="pb-8 cursor-pointer" onClick={() => { setIndexAsil(idx); setOpenAsil(true); }}>
             <div className="flex flex-col">
@@ -340,8 +340,8 @@ const projects = [
         ))}
       </Swiper>
       <Lightbox open={openAsil} close={() => setOpenAsil(false)} index={indexAsil} slides={[
-        {src: '/asil1.png'}, {src: '/asil2.png'}, {src: '/asil3.png'}, {src: '/asil4.png'}, 
-        {src: '/asil5.png'}, {src: '/asil6.png'}, {src: '/asil7.png'}, {src: '/asil8.png'}, {src: '/asil9.png'}
+        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451401/asil1.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil2.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil3.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil4.png'}, 
+        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil5.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil6.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451394/asil7.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png'}
       ]} />
     </motion.div>
 
@@ -374,17 +374,17 @@ const projects = [
   {/* تعریف آرایه تصاویر شاهو تور برای استفاده همزمان در سوییپر و لایت‌باکس */}
   {(() => {
     const shahoSlides = [
-      { src: '/t1.png', title: 'تور گردشگری شاهو', text: 'دموی اولیه - صفحه اصلی' },
-      { src: '/t2.png', title: 'تور ایرانگردی شاهو', text: 'مناطق زیبای ایران' },
-      { src: '/t7.png', title: 'تورهای خارجی شاهو', text: 'تورهای جهانگردی' },
-      { src: '/t15.png', title: 'فرم رزرو', text: 'فرم رزرو سریع شاهو' },
-      { src: '/t5.png', title: 'گالری عکس', text: 'گالری عکس شاهو از مناطق زیبا' },
-      { src: '/t3.png', title: ' درباره شاهو', text: 'تجربه هیجان و لذت' },
-      { src: '/t9.png', title: 'چرا شاهو؟', text: 'تجربه، جوایز بین اللملی ،تور لیدرهای مجرب' },
-      { src: '/t9.png', title: 'وبلاگ شاهو', text: 'مقالات و راهنمای سفرها' },
-      { src: '/t14.png', title: 'ارتباط با ما', text: 'راه های ارتباطی با شاهو' },
-      { src: '/t11.png', title: 'تیم شاهو', text: 'کارشناسان شاهو' },
-      { src: '/t12.png', title: 'نظرات شاهو', text: 'بیان تجربیات سفرهای مسافران شاهو' }
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451403/t1.png', title: 'تور گردشگری شاهو', text: 'دموی اولیه - صفحه اصلی' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451405/t2.png', title: 'تور ایرانگردی شاهو', text: 'مناطق زیبای ایران' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451410/t7.png', title: 'تورهای خارجی شاهو', text: 'تورهای جهانگردی' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451415/t15.png', title: 'فرم رزرو', text: 'فرم رزرو سریع شاهو' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451411/t5.png', title: 'گالری عکس', text: 'گالری عکس شاهو از مناطق زیبا' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451401/t3.png', title: ' درباره شاهو', text: 'تجربه هیجان و لذت' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451410/t9.png', title: 'چرا شاهو؟', text: 'تجربه، جوایز بین اللملی ،تور لیدرهای مجرب' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451415/t10.png', title: 'وبلاگ شاهو', text: 'مقالات و راهنمای سفرها' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451415/t15.png', title: 'ارتباط با ما', text: 'راه های ارتباطی با شاهو' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451414/t11.png', title: 'تیم شاهو', text: 'کارشناسان شاهو' },
+      { src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451415/t12.png', title: 'نظرات شاهو', text: 'بیان تجربیات سفرهای مسافران شاهو' }
     ];
 
     return (
@@ -487,7 +487,7 @@ const projects = [
   <h2 className="text-3xl font-black text-white"> چقدر در زمان و هزینه صرفه‌جویی  می‌کنید؟</h2>
 </div>
       
-        <div className="max-w-xl mx-auto bg-white/5 p-10 rounded-[2rem] backdrop-blur-md border border-white/20">
+        <div className="max-w-xl mx-auto bg-white/5 p-10 rounded\[2rem] backdrop-blur-md border border-white/20">
           <p className="mb-6 text-white text-lg font-medium">میانگین سفارشات روزانه خود را وارد کنید:</p>
           <div className="relative w-full">
             <input 
