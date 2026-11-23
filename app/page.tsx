@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getSupabase } from "@/lib/supabase";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send, MessageCircle, Home as HomeIcon, FolderKanban, TrendingUp } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import CommentList from '../CommentList';
@@ -17,6 +17,65 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+
+// ---------- بهینه‌سازی سرعت (Cloudinary + لود تنبل) ----------
+// تصویر: فرمت و کیفیت خودکار + عرض مناسب، به‌جای فایل PNG اصلی و سنگین
+const optImg = (url: string, t: string = "w_600") =>
+  url.includes("/image/upload/") && !url.includes(`/upload/f_auto`)
+    ? url.replace("/image/upload/", `/image/upload/f_auto,q_auto,${t}/`)
+    : url;
+
+// ویدیو: نسخه سبک‌تر برای کارت‌ها (کیفیت اقتصادی + عرض کوچک‌تر)
+const optVideo = (url: string, t: string = "w_480") =>
+  url.includes("/video/upload/f_auto,q_auto/")
+    ? url.replace("/video/upload/f_auto,q_auto/", `/video/upload/f_auto,q_auto:eco,${t}/`)
+    : url;
+
+// پوستر ویدیو: فریم اول همان ویدیو، ساخته‌شده توسط خود Cloudinary
+const videoPoster = (url: string) =>
+  url.includes("/video/upload/")
+    ? url
+        .replace(/\/video\/upload\/[^/]*\//, "/video/upload/so_0,q_auto,w_480/")
+        .replace(/\.(mp4|mov|webm)$/i, ".jpg")
+    : "";
+
+// ویدیو فقط وقتی نزدیک صفحه‌ی نمایش شد دانلود و پخش می‌شود و بیرون از دید متوقف می‌شود
+function LazyVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { rootMargin: "200px", threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={active ? src : undefined}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="none"
+      className={className}
+    />
+  );
+}
 
 export default function ContactHeader() {
   // هوک‌ها (Hooks) حتماً در ابتدای تابع
@@ -55,7 +114,7 @@ const [indexShaho, setIndexShaho] = useState(0);
     const name = e.target.name.value;
     const message = e.target.message.value;
 
-    const { error } = await getSupabase().from('contacts').insert([{ name, message }]);
+    const { error } = await getSupabase().from('ccomments').insert([{ name, message }]);
     
     if (error) {
       alert("خطا در ثبت: " + error.message);
@@ -254,7 +313,7 @@ const projects = [
   </div>
 </section>
 
-<section id="aboutus" className="py-25 bg\gradient-to-t from-blue-950 to-slate-900 text-white px-8">
+<section id="aboutus" className="py-25 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-8">
   {/* اینجا gap-12 را به gap-6 تغییر دادم تا فاصله دو ستون کم شود */}
   <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-0 items-center">
     
@@ -262,8 +321,9 @@ const projects = [
     <div className="flex justify-center md:justify-start md:pl-16 items-center">
       <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-amber-500 overflow-hidden shadow-2xl">
         <img 
-            src="https://res.cloudinary.com/ljt42uzz/image/upload/v1795451391/proweb.jpg" 
+            src={optImg("https://res.cloudinary.com/ljt42uzz/image/upload/v1795451391/proweb.jpg", "w_400")} 
             alt="متخصص هوشمندسازی و وب" 
+            loading="lazy" decoding="async" 
             className="w-full h-full object-cover"
         />
       </div>
@@ -310,7 +370,7 @@ const projects = [
 </section>
 
 
-<section id="top" className="py-24 bg\gradient-to-t from-blue-950 to-slate-900 text-white px-4 md:px-8">
+<section id="top" className="py-24 bg-gradient-to-t from-blue-950 to-slate-900 text-white px-4 md:px-8">
   <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-16">پروژه‌های شاخص</h2>
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
     {/* کارت ۱: رستوران اصیل */}
@@ -330,7 +390,7 @@ const projects = [
         ].map((item, idx) => (
           <SwiperSlide key={idx} className="pb-8 cursor-pointer" onClick={() => { setIndexAsil(idx); setOpenAsil(true); }}>
             <div className="flex flex-col">
-              <img src={item.src} alt={item.title} className="w-full h-48 object-cover rounded-2xl" />
+              <img src={optImg(item.src, "w_600")} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
               <div className="mt-3 text-right p-2">
                 <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
                 <p className="text-slate-600 text-xs mt-1">{item.text}</p>
@@ -340,8 +400,8 @@ const projects = [
         ))}
       </Swiper>
       <Lightbox open={openAsil} close={() => setOpenAsil(false)} index={indexAsil} slides={[
-        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451401/asil1.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil2.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil3.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil4.png'}, 
-        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil5.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451393/asil6.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451394/asil7.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/v1795451395/asil8.png'}
+        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451401/asil1.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451393/asil2.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451395/asil3.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451395/asil4.png'}, 
+        {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451393/asil5.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451393/asil6.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451394/asil7.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451395/asil8.png'}, {src: 'https://res.cloudinary.com/ljt42uzz/image/upload/f_auto,q_auto,w_1600/v1795451395/asil8.png'}
       ]} />
     </motion.div>
 
@@ -352,7 +412,7 @@ const projects = [
         <div>
           <div className={`h-40 rounded-2xl mb-6 overflow-hidden ${!pro.video ? `bg-gradient-to-tr ${pro.color}` : ""}`}>
             {pro.video ? (
-              <video src={pro.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+              <LazyVideo src={optVideo(pro.video)} poster={videoPoster(pro.video)} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full opacity-90 gap-2"></div>
             )}
@@ -405,7 +465,7 @@ const projects = [
               }}
             >
               <div className="flex flex-col">
-                <img src={item.src} alt={item.title} className="w-full h-48 object-cover rounded-2xl" />
+                <img src={optImg(item.src, "w_600")} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
                 <div className="mt-3 text-right p-2">
                   <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
                   <p className="text-slate-600 text-xs mt-1">{item.text}</p>
@@ -422,7 +482,7 @@ const projects = [
           index={indexShaho} 
           controller={{ closeOnBackdropClick: true }}
           on={{ view: ({ index }) => setIndexShaho(index) }} // آپدیت وضعیت ایندکس هنگام ورق زدن در لایت‌باکس
-          slides={shahoSlides.map(slide => ({ src: slide.src }))} 
+          slides={shahoSlides.map(slide => ({ src: optImg(slide.src, "w_1600") }))} 
         />
       </>
     );
@@ -819,7 +879,7 @@ const projects = [
               time: new Date().toLocaleString('fa-IR')
             };
 
-            emailjs.send(
+  emailjs.send(
               'service_4404k4a', 
               'template_an9us09', 
               templateParams, 
@@ -859,6 +919,8 @@ const projects = [
       <div className="w-full h-48 md:h-64 rounded-2xl overflow-hidden mb-4 bg-black flex-shrink-0">
         <video 
           src={selectedProject.video} 
+          poster={videoPoster(selectedProject.video)}
+          preload="metadata"
           controls 
           className="w-full h-full object-contain"
         />

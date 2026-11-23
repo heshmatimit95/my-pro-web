@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { services } from './pricingData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function ProjectEstimator() {
+export default function ProjectEstimator({ onClose }: { onClose?: () => void }) {
   const [step, setStep] = useState(1);
   const [selectedMainService, setSelectedMainService] = useState<any>(null);
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
@@ -43,7 +43,8 @@ const message = `\u200F🚨  myproweb سفارش جدید
   window.open(url, '_blank');
 };
 
-  const handleClose = () => window.location.reload();
+  // بستن فوری مودال بدون رفرش صفحه (اگر onClose داده نشده بود، رفتار قبلی حفظ می‌شود)
+  const handleClose = () => { if (onClose) onClose(); else window.location.reload(); };
 
 return (
   <div className="w-full h-full overflow-hidden flex flex-col bg-white" dir="rtl">

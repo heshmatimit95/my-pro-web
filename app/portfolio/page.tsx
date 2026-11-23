@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from 'lucide-react';
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -9,6 +9,65 @@ import Footer from "../../components/Footer";
 import Counter from "../../components/Counter";
 import ProjectEstimator from '@/components/ProjectEstimator';
 import { projects as externalProjects } from './projectsData'; // ایمپورت کردن داده‌ها
+
+// ---------- بهینه‌سازی سرعت (Cloudinary + لود تنبل) ----------
+// تصویر: فرمت و کیفیت خودکار + عرض مناسب، به‌جای فایل PNG اصلی و سنگین
+const optImg = (url: string, t: string = "w_600") =>
+  url.includes("/image/upload/") && !url.includes(`/upload/f_auto`)
+    ? url.replace("/image/upload/", `/image/upload/f_auto,q_auto,${t}/`)
+    : url;
+
+// ویدیو: نسخه سبک‌تر برای کارت‌ها (کیفیت اقتصادی + عرض کوچک‌تر)
+const optVideo = (url: string, t: string = "w_480") =>
+  url.includes("/video/upload/f_auto,q_auto/")
+    ? url.replace("/video/upload/f_auto,q_auto/", `/video/upload/f_auto,q_auto:eco,${t}/`)
+    : url;
+
+// پوستر ویدیو: فریم اول همان ویدیو، ساخته‌شده توسط خود Cloudinary
+const videoPoster = (url: string) =>
+  url.includes("/video/upload/")
+    ? url
+        .replace(/\/video\/upload\/[^/]*\//, "/video/upload/so_0,q_auto,w_480/")
+        .replace(/\.(mp4|mov|webm)$/i, ".jpg")
+    : "";
+
+// ویدیو فقط وقتی نزدیک صفحه‌ی نمایش شد دانلود و پخش می‌شود و بیرون از دید متوقف می‌شود
+function LazyVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { rootMargin: "200px", threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={active ? src : undefined}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="none"
+      className={className}
+    />
+  );
+}
 
 const cloudinaryThumbnails: Record<string, string> = {
   "asil.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_1",
@@ -23,12 +82,15 @@ const cloudinaryThumbnails: Record<string, string> = {
 
 const getThumbnailUrl = (videoPath: string) => {
   if (!videoPath || videoPath === "coming-soon") return "";
-  if (cloudinaryThumbnails[videoPath]) {
+  // اولویت با فریم اولِ همان ویدیو که Cloudinary می‌سازد (سبک و بدون نیاز به لینک دستی)
+  const auto = videoPoster(videoPath);
+  if (auto) return auto;
+  if (cloudinaryThumbnails[videoPath] && !cloudinaryThumbnails[videoPath].includes("<cloud-name>")) {
     return cloudinaryThumbnails[videoPath];
   }
   const cleanUrl = videoPath.split("?")[0];
   const fileName = cleanUrl.split("/").pop()?.replace(/^\/+/, "") || "";
-  if (cloudinaryThumbnails[fileName]) {
+  if (cloudinaryThumbnails[fileName] && !cloudinaryThumbnails[fileName].includes("<cloud-name>")) {
     return cloudinaryThumbnails[fileName];
   }
   return `https://myproweb.ir/thumbnails/${fileName.replace(/\.mp4$/i, ".jpg")}`;
@@ -208,6 +270,14 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  // بستن مودال استعلام قیمت با کلید Esc
+  useEffect(() => {
+    if (!isEstimatorOpen) return;
+    const onKey = (ev: KeyboardEvent) => { if (ev.key === "Escape") setIsEstimatorOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isEstimatorOpen]);
+
   const handleFormSubmit = async (formData: any) => {
     const response = await fetch('/api/order', {
       method: 'POST',
@@ -255,11 +325,11 @@ export default function Portfolio() {
 
       {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
       {isEstimatorOpen && (
-        <div className="fixed inset-0 z-[100] bg-blue-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-lg">
+        <div className="fixed inset-0 z-[100] bg-blue-950/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setIsEstimatorOpen(false)}>
+          <div className="relative w-full max-w-lg" onClick={(ev) => ev.stopPropagation()}>
             {/* کانتینر سفید مودال */}
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
-              <ProjectEstimator />
+              <ProjectEstimator onClose={() => setIsEstimatorOpen(false)} />
             </div>
           </div>
         </div>
@@ -353,12 +423,8 @@ export default function Portfolio() {
                     </span>
                   </div>
                 ) : pro.video && pro.video.trim() !== "" ? (
-                  <video
-                    src={pro.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                  <LazyVideo
+                    src={optVideo(pro.video)}
                     poster={getThumbnailUrl(pro.video)}
                     className="w-full h-full object-cover"
                   />
@@ -550,7 +616,7 @@ export default function Portfolio() {
           {isOpen && (
             <div className="flex flex-col gap-4 animate-in slide-in-from-bottom-10 fade-in zoom-in duration-300">
               {/* واتس‌اپ */}
-              <a href="https://wa.me/989194077618" target="_blank" className="group relative flex items-center justify-end">
+              <a href="https://wa.me/989" target="_blank" className="group relative flex items-center justify-end">
                 <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط واتس‌اپ</span>
                 <div className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
                   <IoLogoWhatsapp size={30} color="white" />
@@ -612,6 +678,7 @@ export default function Portfolio() {
               <video 
                 src={selectedProject.video}
                 poster={getThumbnailUrl(selectedProject.video)}
+                preload="metadata"
                 controls 
                 className="w-full h-full object-contain"
               />

@@ -1,9 +1,17 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProjectEstimator from '@/components/ProjectEstimator';
 
 export default function Header({ setIsProjectModalOpen }: any) {
   const [isEstimatorOpen, setIsEstimatorOpen] = useState(false);
+
+  // بستن مودال استعلام قیمت با کلید Esc
+  useEffect(() => {
+    if (!isEstimatorOpen) return;
+    const onKey = (ev: KeyboardEvent) => { if (ev.key === "Escape") setIsEstimatorOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isEstimatorOpen]);
 
   return (
     <>
@@ -46,12 +54,12 @@ export default function Header({ setIsProjectModalOpen }: any) {
       </header>
      {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
       {isEstimatorOpen && (
-        <div className="fixed inset-0 z-[100] bg-blue-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-lg">
+        <div className="fixed inset-0 z-[100] bg-blue-950/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setIsEstimatorOpen(false)}>
+          <div className="relative w-full max-w-lg" onClick={(ev) => ev.stopPropagation()}>
             
                         {/* کانتینر سفید مودال */}
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
-              <ProjectEstimator />
+              <ProjectEstimator onClose={() => setIsEstimatorOpen(false)} />
             
 
             </div>
