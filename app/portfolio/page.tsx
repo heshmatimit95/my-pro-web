@@ -22,7 +22,7 @@ const projects = [
     id: 1, 
     title: "سیستم هوشمند مدیریت رستوران (اصیل)", 
     desc: "اتوماسیون کامل سفارشات آنلاین، سالن و آشپزخانه", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292187/asil.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292187/asil.mp4", 
     liveLink: "https://asilfood.ir", 
     liveLinkLabel: "مشاهده نسخه دمو و تست پنل کاربری",
     fullDetail: `مدیریت هم‌زمان و مانیتورینگ دقیق فرآیندها، چالش اصلی رستوران‌های بزرگ و زنجیره‌ای است. این سیستم یک پلتفرم اتوماسیون جامع است که تمام بخش‌های عملیاتی را یکپارچه می‌کند.
@@ -39,7 +39,7 @@ const projects = [
     id: 2, 
     title: "پلتفرم گردشگری شاهو تور", 
     desc: "رزرو آنلاین تورهای داخلی، طبیعت‌گردی و اقامتگاه", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292021/shaho3.mp4",
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292021/shaho3.mp4",
     liveLink: "https://shahotour.ir",
     fullDetail: `در صنعت گردشگری، ارائه اطلاعات شفاف و فرآیند رزرو سریع، کلید تبدیل بازدیدکننده به مشتری است. وب‌سایت شاهو یک پلتفرم پویا برای معرفی، مدیریت و فروش پکیج‌های تور داخلی و خارجی است.
 
@@ -55,7 +55,7 @@ const projects = [
     id: 3, 
     title: "داشبورد هوشمند ارزی و مالی اکسل", 
     desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292133/gold-3.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292133/gold-3.mp4", 
     fullDetail: `داشبورد مدیریتی در اکسل با قابلیت وب‌اسکرپینگ و دریافت لحظه‌ای نرخ دلار و طلا. این پروژه مجهز به موتور تحلیل هوشمند (باکس بنفش تایپ متحرک)، آرشیو خودکار سوابق قیمت و معماری منحصربه‌فرد مولتی‌لنگوئیج است که کل محیط داشبورد، چیدمان فیزیکی باکس‌ها (Mirroring) و نمودارها را به صورت آنی بین ۴ زبان فارسی، انگلیسی، فرانسه و آلمانی سوئیچ می‌کند.`, 
     color: "from-amber-400 to-orange-600" 
   },
@@ -63,7 +63,7 @@ const projects = [
     id: 4, 
     title: "سیستم مدیریت دارایی (SHIS)", 
     desc: "مدیریت هوشمند دارایی‌های IT و تجهیزات سازمانی", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795291297/SHIS.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795291297/SHIS.mp4", 
     fullDetail: `در سازمان‌های بزرگ، ردیابی دقیق تجهیزات سخت‌افزاری و نرم‌افزاری پرسنل همواره یک چالش جدی است. سیستم SHIS راهکاری جامع و متمرکز برای مدیریت هوشمند این دارایی‌هاست؛ فراتر از یک لیست سنتی و ساده.
 
 قابلیت‌های کلیدی سیستم:
@@ -78,7 +78,7 @@ const projects = [
     id: 5, 
     title: "سیستم گزارش‌گیری  BPMRS", 
     desc: "سیستم گزارش‌گیری مدیریت فرآیندها BPMRS", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292107/BPMRS.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292107/BPMRS.mp4", 
     fullDetail: `مدیریت سازمان‌های بزرگ بدون داشتن دیدِ فرآیندی جامع غیرممکن است. پلتفرم BPMRS راهکاری یکپارچه برای مانیتورینگ و ارزیابی دقیق فرآیندها و زیرفرآیندهای سازمانی است که کنترل کاملی از مدل‌سازی تا اجرای عملیاتی به مدیران می‌دهد.
 
 ویژگی‌های شاخص این سیستم:
@@ -91,7 +91,7 @@ const projects = [
     id: 6, 
     title: "پروژه MAP (تحلیل نظام پیشنهادات)", 
     desc: "پاکسازی داده‌های انبوه و داشبورد مدیریتی نظام پیشنهادات", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795290772/AMAR.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795290772/AMAR.mp4", 
     fullDetail: `در سازمان‌های بزرگ، داده‌های خام معمولاً نامنظم، پراکنده و آشفته هستند. نرم‌افزار MAP راهکاری هوشمند و اختصاصی است که برای نظام پیشنهادات شرکت مخابرات طراحی کرده‌ام تا داده‌های کثیف را به تصمیمات استراتژیک مدیریتی تبدیل کند.
 
 قابلیت‌های کلیدی این سیستم:
@@ -106,7 +106,7 @@ const projects = [
     id: 7, 
     title: "گزارش تحلیلی فروش و زنجیره تأمین شرکت پخش دارو", 
     desc: "کنترل موجودی هوشمند و تحلیل زنجیره تأمین دارو", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795291998/pharma-sales.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795291998/pharma-sales.mp4", 
     fullDetail: `در صنایع حساس مانند پخش و توزیع دارو، مدیریت دقیق زنجیره تأمین و پیش‌بینی تقاضا اهمیت حیاتی دارد. این داشبورد تحلیلی ابزاری قدرتمند برای پایش لحظه‌ای فرآیندهای فروش و بهینه‌سازی انبارداری است.
 
 قابلیت‌های کلیدی این سیستم:
@@ -121,7 +121,7 @@ const projects = [
     id: 8, 
     title: "داشبورد داینامیک مانیتورینگ عملکرد مراکز فروش (Sales Performance Dashboard)", 
     desc: "پایش هوشمند عملکرد, تحلیل روندها و رتبه‌بندی خودکار مراکز", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/v1795292096/sales-performance.mp4", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292096/sales-performance.mp4", 
     fullDetail: ` ارزیابی دقیق و سریع عملکرد دفاتر و مراکز فروش یک ضرورت است. این داشبورد تخصصی به جای گزارش‌های متنی و سنتی طولانی، وضعیت سلامت عملیاتی و بازدهی هر مرکز را در یک نگاه به تصویر می‌کشد.
 
 قابلیت‌های کلیدی این سیستم:
