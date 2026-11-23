@@ -70,14 +70,15 @@ function LazyVideo({ src, poster, className }: { src: string; poster?: string; c
 }
 
 const cloudinaryThumbnails: Record<string, string> = {
-  "asil.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_1",
-  "shaho3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_2",
-  "gold-3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_3",
-  "SHIS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_4",
-  "BPMRS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_5",
-  "AMAR.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_6",
-  "pharma-sales.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_7",
-  "sales-performance.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_8",
+  "lidera.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_1",
+  "asil.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_2",
+  "shaho3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_3",
+  "gold-3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_4",
+  "SHIS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_5",
+  "BPMRS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_6",
+  "AMAR.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_7",
+  "pharma-sales.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_8",
+  "sales-performance.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_9",
 };
 
 const getThumbnailUrl = (videoPath: string) => {
@@ -105,8 +106,26 @@ const getVideoContentUrl = (videoPath: string) => {
 };
 
 const projects = [
-  { 
+{ 
     id: 1, 
+    title: "پلتفرم جامع مدیریت تور و لیدری (لیدرا)", 
+    desc: "مدیریت هوشمند تورها، پکیج‌ها، ثبت‌نام مسافران و امور مالی", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795474610/lidera.mp4", 
+    liveLink: "https://lidera.ir", 
+    liveLinkLabel: "مشاهده سایت زنده لیدرا",
+    fullDetail: `پراکندگی اطلاعات تورها، پیگیری دستی ثبت‌نام‌ها و حساب‌وکتاب‌های زمان‌بر، چالش اصلی لیدرها و برگزارکنندگان تور است. لیدرا یک پلتفرم چندمستأجره و هوشمند است که تمام فرآیندهای اجرای تور را در یک محیط یکپارچه گرد هم می‌آورد.
+
+قابلیت‌های کلیدی پلتفرم:
+🔹 دستیار هوشمند ساخت برنامه سفر: تولید و اصلاح سریع برنامه سفر، پکیج‌ها و کپشن معرفی تور با هوش مصنوعی، همراه با بخش «از من بپرس».
+🔹 پاسخ‌گویی هوشمند و فرم مسافر: پاسخ‌گویی خودکار به سؤالات مسافر درباره قیمت، هتل، خدمات و ثبت‌نام بر اساس اطلاعات همان تور.
+🔹 مدیریت مالی و تحلیل سودآوری: پیگیری مبلغ وصول‌شده، بیعانه و معوق، ثبت هزینه‌ها و محاسبه سود پیش‌بینی‌شده و نقطه سربه‌سر هر تور.
+
+این پلتفرم با نظم‌دهی به عملیات و کاهش پیگیری‌های تکراری، سرعت اجرا و دقت مدیریت هر تور را به شکل چشمگیری افزایش می‌دهد.`, 
+    color: "from-emerald-500 to-teal-700"
+  },
+
+  { 
+    id: 2, 
     title: "سیستم هوشمند مدیریت رستوران (اصیل)", 
     desc: "اتوماسیون کامل سفارشات آنلاین، سالن و آشپزخانه", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292187/asil.mp4", 
@@ -123,7 +142,7 @@ const projects = [
     color: "from-blue-500 to-blue-700"
   },
   { 
-    id: 2, 
+    id: 3, 
     title: "پلتفرم گردشگری شاهو تور", 
     desc: "رزرو آنلاین تورهای داخلی، طبیعت‌گردی و اقامتگاه", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292021/shaho3.mp4",
@@ -139,7 +158,7 @@ const projects = [
     color: "from-green-500 to-emerald-700",
   },
   { 
-    id: 3, 
+    id: 4, 
     title: "داشبورد هوشمند ارزی و مالی اکسل", 
     desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292133/gold-3.mp4", 
@@ -147,7 +166,7 @@ const projects = [
     color: "from-amber-400 to-orange-600" 
   },
   {
-    id: 4, 
+    id: 5, 
     title: "سیستم مدیریت دارایی (SHIS)", 
     desc: "مدیریت هوشمند دارایی‌های IT و تجهیزات سازمانی", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795291297/SHIS.mp4", 
@@ -162,7 +181,7 @@ const projects = [
     color: "from-blue-500 to-blue-700" 
   },
   { 
-    id: 5, 
+    id: 6, 
     title: "سیستم گزارش‌گیری  BPMRS", 
     desc: "سیستم گزارش‌گیری مدیریت فرآیندها BPMRS", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292107/BPMRS.mp4", 
@@ -175,7 +194,7 @@ const projects = [
     color: "from-indigo-500 to-purple-700" 
   },
   { 
-    id: 6, 
+    id: 7, 
     title: "پروژه MAP (تحلیل نظام پیشنهادات)", 
     desc: "پاکسازی داده‌های انبوه و داشبورد مدیریتی نظام پیشنهادات", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795290772/AMAR.mp4", 
@@ -190,7 +209,7 @@ const projects = [
     color: "from-amber-400 to-orange-600" 
   },
   { 
-    id: 7, 
+    id: 8, 
     title: "گزارش تحلیلی فروش و زنجیره تأمین شرکت پخش دارو", 
     desc: "کنترل موجودی هوشمند و تحلیل زنجیره تأمین دارو", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795291998/pharma-sales.mp4", 
@@ -205,7 +224,7 @@ const projects = [
     color: "from-green-500 to-emerald-700" 
   },
   { 
-    id: 8, 
+    id: 9, 
     title: "داشبورد داینامیک مانیتورینگ عملکرد مراکز فروش (Sales Performance Dashboard)", 
     desc: "پایش هوشمند عملکرد, تحلیل روندها و رتبه‌بندی خودکار مراکز", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292096/sales-performance.mp4", 
@@ -219,20 +238,7 @@ const projects = [
 این سیستم با حذف فرآیندهای تحلیل دستی، سرعت و دقت تصمیم‌گیری مدیران ارشد را در مدیریت شبکه و خدمات به شدت افزایش داده است.`, 
     color: "from-green-500 to-emerald-700" 
   },
-  { 
-    id: 9, 
-    title: "سیستم هوشمند و داینامیک انبارداری", 
-    desc: "مدیریت زنجیره تأمین، پایش لحظه‌ای موجودی و کنترل کسری کالا", 
-    video: "coming-soon", 
-    fullDetail: `مدیریت دقیق و بهینه انبار، قلب تپنده بخش عملیات و فروش هر کسب‌وکار است. این سیستم انبارداری داینامیک ابزاری هوشمند برای کنترل متمرکز، دقیق و لحظه‌ای گردش کالا در سازمان است.
-قابلیت‌های کلیدی این سیستم:
-🔹 کنترل پویای موجودی: پایش آنلاین و خودکار وضعیت کالاهای ورودی و خروجی جهت بهینه‌سازی حجم انبارداری.
-🔹 هشدار خودکار کسری کالا: سیستم هوشمند نقطه‌ سفارش (Reorder Point) برای جلوگیری از اتمام ناگهانی اقلام استراتژیک.
-🔹 گزارش‌گیری و نمودارهای داینامیک: بصری‌سازی وضعیت انبار و سرعت گردش کالا جهت تصمیم‌گیری‌های مالی و تأمین بهینه.
 
-این پروژه فرآیندهای سنتی و دستی انبارداری را به یک سیستم کاملاً مکانیزه و قابل اطمینان تبدیل می‌کند تا بهره‌وری زنجیره تأمین به حداکثر برسد.`, 
-    color: "from-green-500 to-emerald-700" 
-  }
 ];
 
 const VideoSchemas = () => {
