@@ -359,23 +359,28 @@ const projects = [
       </div>
     </div>
 
-    {/* ستون متن */}
-    <div>
-      <h3 className="text-2xl text-amber-500 font-bold uppercase tracking-widest mb-2">درباره ما</h3>
-      <h2 className="text-4xl font-extrabold text-white mb-6">داستان ما؛ فراتر از اعداد</h2>
-      <div className="w-25 h-1.5 bg-amber-500 rounded-full mb-6"></div>
-<p className="text-lg text-white leading-relaxed mb-6">
-  من متخصصِ مدیریت و تحلیل داده در اکسل هستم و حالا با همین نگاهِ دقیق و داده‌محور، وارد دنیای طراحی وب شده‌ام. 
-  رویکردِ من در پروژه‌ها این است: 
-  <span className="block mt-4 font-semibold text-white">• تبدیلِ داده‌های پیچیده به داشبوردهای مدیریتیِ ساده</span>
-  <span className="block font-semibold text-white">•  ساختِ وب‌ سایت‌های کاربردی با تمرکز بر نظم ، کارایی ، هوشمند و دقیق  </span>
-  <span className="block font-semibold text-white">• یادگیری وپیاده‌سازی جدیدترین راهکارها وهوشمندسازی کسب‌ و کارهای کوچک</span>
-</p>
+{/* ستون متن */}
+    <div className="text-right">
+      <h3 className="text-xl sm:text-2xl text-amber-500 font-bold tracking-wide mb-2">
+        درباره ما
+      </h3>
+      <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4 sm:mb-6 leading-snug">
+        داستان ما؛ فراتر از اعداد
+      </h2>
+      <div className="w-24 h-1.5 bg-amber-500 rounded-full mb-6"></div>
+
+      <p className="text-base sm:text-lg text-white leading-relaxed text-justify md:text-right mb-4">
+        من متخصصِ مدیریت و تحلیل داده در اکسل هستم و حالا با همین نگاهِ دقیق و داده‌محور، وارد دنیای طراحی وب شده‌ام. رویکردِ من در پروژه‌ها این است:
+      </p>
+
+      <ul className="space-y-3 text-base sm:text-lg font-semibold text-white text-right leading-relaxed">
+        <li>• تبدیلِ داده‌های پیچیده به داشبوردهای مدیریتیِ ساده</li>
+        <li>• ساختِ وب‌سایت‌های کاربردی با تمرکز بر نظم، کارایی، هوشمند و دقیق</li>
+        <li>• یادگیری و پیاده‌سازی جدیدترین راهکارها و هوشمندسازی کسب‌وکارهای کوچک</li>
+      </ul>
     </div>
   </div>
 </section>
-
-
 
 {/* بخش فراخوان  */}
 <section className="flex flex-col items-center justify-center py-25 bg-white-950">
