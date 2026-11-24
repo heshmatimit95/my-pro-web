@@ -281,7 +281,6 @@ export default function Portfolio() {
   const [dailyHours, setDailyHours] = useState<number>(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // بستن مودال استعلام قیمت با کلید Esc
   useEffect(() => {
@@ -290,6 +289,11 @@ export default function Portfolio() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isEstimatorOpen]);
+
+  // بستن منوی موبایل بعد از کلیک روی یک گزینه
+  const closeMenu = (e: React.MouseEvent<HTMLElement>) => {
+    (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open");
+  };
 
   const handleFormSubmit = async (formData: any) => {
     const response = await fetch('/api/order', {
@@ -333,33 +337,26 @@ export default function Portfolio() {
               استعلام قیمت
             </button>
           </div>
-          {/* دکمه منوی موبایل */}
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="منو"
-            aria-expanded={isMenuOpen}
-            className="md:hidden p-2 text-blue-950"
-          >
-            {isMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
-            )}
-          </button>
+          {/* منوی موبایل: با details کار می‌کند و برای باز شدن به جاوااسکریپت نیاز ندارد */}
+          <details className="md:hidden group">
+            <summary
+              aria-label="منو"
+              className="list-none cursor-pointer p-2 text-blue-950 [&::-webkit-details-marker]:hidden"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 group-open:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hidden group-open:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+            </summary>
+            <div className="absolute top-full left-0 right-0 border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950 shadow-lg">
+            <Link href="/" onClick={closeMenu} className="hover:text-amber-500 transition-colors">خانه</Link>
+            <a href="#projects" onClick={closeMenu} className="hover:text-amber-500 transition-colors">پروژه‌ها</a>
+            <a href="#consulat" onClick={closeMenu} className="hover:text-amber-500 transition-colors">مشاوره رایگان</a>
+            <a href="#result" onClick={closeMenu} className="hover:text-amber-500 transition-colors">نتایج ملموس</a>
+            <Link href="/terms" onClick={closeMenu} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
+            <Link href="/contact" onClick={closeMenu} className="hover:text-amber-500 transition-colors">تماس با ما</Link>
+            <button onClick={(e) => { closeMenu(e); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
+            </div>
+          </details>
         </nav>
-        {/* منوی موبایل */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950">
-            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">خانه</Link>
-            <a href="#projects" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">پروژه‌ها</a>
-            <a href="#consulat" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مشاوره رایگان</a>
-            <a href="#result" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">نتایج ملموس</a>
-            <Link href="/terms" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
-            <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">تماس با ما</Link>
-            <button onClick={() => { setIsMenuOpen(false); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
-          </div>
-        )}
       </header>
 
       {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
@@ -663,7 +660,7 @@ export default function Portfolio() {
               </a>
 
               {/* تلگرام */}
-              <a href="https://telegram.me/myproweb56" target="_blank" className="group relative flex items-center justify-end">
+              <a href="https://telegram.me/@myproweb56" target="_blank" className="group relative flex items-center justify-end">
                 <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط تلگرام</span>
                 <div className="w-14 h-14 bg-[#3E99D8] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
                   <SiTelegram size={30} color="white" />

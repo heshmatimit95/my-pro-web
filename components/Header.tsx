@@ -8,7 +8,6 @@ const ProjectEstimator = dynamic(() => import('@/components/ProjectEstimator'), 
 
 export default function Header({ setIsProjectModalOpen }: any) {
   const [isEstimatorOpen, setIsEstimatorOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // بستن مودال استعلام قیمت با کلید Esc
   useEffect(() => {
@@ -17,6 +16,11 @@ export default function Header({ setIsProjectModalOpen }: any) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isEstimatorOpen]);
+
+  // بستن منوی موبایل بعد از کلیک روی یک گزینه
+  const closeMenu = (e: React.MouseEvent<HTMLElement>) => {
+    (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open");
+  };
 
   return (
     <>
@@ -55,34 +59,27 @@ export default function Header({ setIsProjectModalOpen }: any) {
               استعلام قیمت
             </button>
           </div>
-          {/* دکمه منوی موبایل */}
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="منو"
-            aria-expanded={isMenuOpen}
-            className="md:hidden p-2 text-blue-950"
-          >
-            {isMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
-            )}
-          </button>
+          {/* منوی موبایل: با details کار می‌کند و برای باز شدن به جاوااسکریپت نیاز ندارد */}
+          <details className="md:hidden group">
+            <summary
+              aria-label="منو"
+              className="list-none cursor-pointer p-2 text-blue-950 [&::-webkit-details-marker]:hidden"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 group-open:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hidden group-open:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+            </summary>
+            <div className="absolute top-full left-0 right-0 border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950 shadow-lg">
+            <Link href="/" onClick={closeMenu} className="hover:text-amber-500 transition-colors">خانه</Link>
+            <a href="#top" onClick={closeMenu} className="hover:text-amber-500 transition-colors">پروژه‌ها شاخص</a>
+            <a href="#calculator" onClick={closeMenu} className="hover:text-amber-500 transition-colors">محاسبه رایگان هزینه و زمان</a>
+            <Link href="/portfolio" onClick={closeMenu} className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</Link>
+            <Link href="/terms" onClick={closeMenu} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
+            <a href="#aboutus" onClick={closeMenu} className="hover:text-amber-500 transition-colors">درباره ما</a>
+            <button onClick={(e) => { closeMenu(e); setIsProjectModalOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">مشاوره رایگان</button>
+            <button onClick={(e) => { closeMenu(e); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
+            </div>
+          </details>
         </nav>
-        {/* منوی موبایل */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950">
-            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">خانه</Link>
-            <a href="#top" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">پروژه‌ها شاخص</a>
-            <a href="#calculator" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">محاسبه رایگان هزینه و زمان</a>
-            <Link href="/portfolio" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</Link>
-            <Link href="/terms" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
-            <a href="#aboutus" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">درباره ما</a>
-            <button onClick={() => { setIsMenuOpen(false); setIsProjectModalOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">مشاوره رایگان</button>
-            <button onClick={() => { setIsMenuOpen(false); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
-          </div>
-        )}
       </header>
      {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
       {isEstimatorOpen && (
