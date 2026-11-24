@@ -1,9 +1,14 @@
 "use client";
 import { useState, useEffect } from 'react';
-import ProjectEstimator from '@/components/ProjectEstimator';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// مودال استعلام قیمت فقط هنگام باز شدن بارگذاری می‌شود (صفحه اصلی سبک‌تر بالا می‌آید)
+const ProjectEstimator = dynamic(() => import('@/components/ProjectEstimator'), { ssr: false });
 
 export default function Header({ setIsProjectModalOpen }: any) {
   const [isEstimatorOpen, setIsEstimatorOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // بستن مودال استعلام قیمت با کلید Esc
   useEffect(() => {
@@ -23,16 +28,16 @@ export default function Header({ setIsProjectModalOpen }: any) {
           </div>
 
           <div className="hidden md:flex gap-8 font-bold text-blue-950">
-            <a href="/" className="hover:text-amber-500 transition-colors">خانه</a>
+            <Link href="/" className="hover:text-amber-500 transition-colors">خانه</Link>
             <a href="#top" className="hover:text-amber-500 transition-colors">پروژه‌ها شاخص</a>
             <a href="#calculator" className="hover:text-amber-500 transition-colors">محاسبه رایگان هزینه و زمان</a>
-              <a href="/portfolio" className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</a>
-            <a href="/terms" className="hover:text-amber-500 transition-colors">مسیر همکاری</a>
+              <Link href="/portfolio" className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</Link>
+            <Link href="/terms" className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
            <a href="#aboutus" className="hover:text-amber-500 transition-colors">درباره ما</a>
           
           </div>
 
-          <div className="flex gap-3">
+          <div className="hidden md:flex gap-3">
             <button
               onClick={() => setIsProjectModalOpen(true)}
               className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black hover:bg-blue-950 transition-all shadow-lg"
@@ -50,7 +55,34 @@ export default function Header({ setIsProjectModalOpen }: any) {
               استعلام قیمت
             </button>
           </div>
+          {/* دکمه منوی موبایل */}
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="منو"
+            aria-expanded={isMenuOpen}
+            className="md:hidden p-2 text-blue-950"
+          >
+            {isMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
+            )}
+          </button>
         </nav>
+        {/* منوی موبایل */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">خانه</Link>
+            <a href="#top" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">پروژه‌ها شاخص</a>
+            <a href="#calculator" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">محاسبه رایگان هزینه و زمان</a>
+            <Link href="/portfolio" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مشاهده نمونه کارها</Link>
+            <Link href="/terms" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
+            <a href="#aboutus" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">درباره ما</a>
+            <button onClick={() => { setIsMenuOpen(false); setIsProjectModalOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">مشاوره رایگان</button>
+            <button onClick={() => { setIsMenuOpen(false); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
+          </div>
+        )}
       </header>
      {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
       {isEstimatorOpen && (

@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getSupabase } from "@/lib/supabase";
@@ -15,8 +17,10 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+
+// لایت‌باکس سنگین است و فقط پس از آماده شدن صفحه بارگذاری می‌شود
+const Lightbox = dynamic(() => import("yet-another-react-lightbox"), { ssr: false });
 
 // ---------- بهینه‌سازی سرعت (Cloudinary + لود تنبل) ----------
 // تصویر: فرمت و کیفیت خودکار + عرض مناسب، به‌جای فایل PNG اصلی و سنگین
@@ -76,6 +80,27 @@ function LazyVideo({ src, poster, className }: { src: string; poster?: string; c
     />
   );
 }
+
+// سوالات متداول (هم برای نمایش در صفحه و هم برای داده‌ی ساختاریافته FAQPage)
+const FAQS = [
+  { q: "آیا وب‌سایت‌های شما امنیت کافی دارند؟", a: "بله. در طراحی و پیاده‌سازی وب‌سایت‌ها اصول امنیتی استاندارد (بر اساس توصیه‌های OWASP) را رعایت می‌کنیم؛ از جمله ارتباط رمزگذاری‌شده HTTPS با گواهی SSL معتبر، محافظت در برابر حملات رایج، اعتبارسنجی ورودی فرم‌ها و به‌روزرسانی منظم کتابخانه‌ها. این اقدامات ریسک را به‌طور جدی کاهش می‌دهد تا اطلاعات کسب‌وکار و مشتریان شما در سطح مناسبی محافظت شود." },
+  { q: "آیا وب‌ سایت ما می‌تواند به فایل‌های اکسل متصل شود؟",a:"تخصص ما در کنار طراحی وب، یکپارچه‌سازی سیستم‌های داده‌محور است. می‌توانم وب‌ سایت شما را به گونه‌ای طراحی کنم که داده‌های خروجیِ اکسل‌تان را به راحتی در پنل مدیریتی‌تان تحلیل و مشاهده کنید." 
+},
+  { q: "آیا سیستم با نرم‌افزارهای موجود سازگار است؟", a: "بله، راهکارهای من از طریق روش‌های استاندارد، با نرم‌افزارهای مالی و ERPهای داخلی هماهنگ می‌شوند." },
+  { q: "زمان تحویل پروژه هوشمندسازی اکسل چقدر است؟", a: "با توجه به تحلیل نیازهای شما، زمان‌بندی دقیق در جلسه مشاوره مشخص می‌شود اما به طور معمول پروژه‌ها بین ۷ تا ۱۵ روز کاری نهایی می‌شوند." },
+  { q: "آیا پس از تحویل، پشتیبانی فنی ارائه می‌دهید؟", a: "قطعا! تمامی پروژه‌ها دارای یک ماه پشتیبانی رایگان به همراه فیلم آموزشی و امکان تمدید قرارداد برای نگهداری و توسعه هستند." },
+  { q: "امنیت داده‌های حساس در اکسل چگونه تضمین می‌شود؟", a: "من از روش‌های محافظت از فایل و محدودسازی دسترسی در سطوح مختلف استفاده می‌کنم تا امنیت اطلاعات شما حفظ شود." }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
 export default function ContactHeader() {
   // هوک‌ها (Hooks) حتماً در ابتدای تابع
@@ -175,16 +200,21 @@ const handleContactSubmit = async (e: any) => {
 const projects = [
   { 
     id: 1, 
-    title:"داشبورد هوشمند ارزی و مالی اکسل",
-    desc: "تحلیل خودکار بازار دلار و طلا به ۴ زبان",
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292133/gold-3.mp4", 
-    fullDetail:`داشبورد مدیریتی در اکسل با قابلیت وب‌اسکرپینگ و دریافت لحظه‌ای نرخ دلار و طلا. این پروژه مجهز به موتور تحلیل هوشمند (باکس بنفش تایپ متحرک)، آرشیو خودکار سوابق قیمت و معماری منحصربه‌فرد مولتی‌لنگوئیج است که کل محیط داشبورد، چیدمان فیزیکی باکس‌ها (Mirroring) و نمودارها را به صورت آنی بین ۴ زبان فارسی، انگلیسی، فرانسه و آلمانی سوئیچ می‌کند.`, 
+    title: "پلتفرم جامع مدیریت تور و لیدری (لیدرا)", 
+    desc: "مدیریت هوشمند تورها، پکیج‌ها، ثبت‌نام مسافران و امور مالی", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795474610/lidera.mp4", 
+   fullDetail: `پراکندگی اطلاعات تورها، پیگیری دستی ثبت‌نام‌ها و حساب‌وکتاب‌های زمان‌بر، چالش اصلی لیدرها و برگزارکنندگان تور است. لیدرا یک پلتفرم چندمستأجره و هوشمند است که تمام فرآیندهای اجرای تور را در یک محیط یکپارچه گرد هم می‌آورد.
+`, 
     color: "from-amber-500 to-orange-600" 
   },
 ]
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 pt-20" dir="rtl">
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+/>
 <Header setIsProjectModalOpen={setIsProjectModalOpen} />
 
                {selectedImage && (
@@ -197,11 +227,11 @@ const projects = [
 
 
 
-  <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-center">
+  <div className="text-4xl md:text-6xl font-black tracking-tighter text-center">
 
     My<span className="text-amber-500">Pro</span>Web
 
-  </h1>
+  </div>
 
   {/* متن توضیحات با فاصله استاندارد از عنوان */}
 
@@ -211,19 +241,19 @@ const projects = [
 
   </p>
 
-  <p className="mt-6 text-xl md:text-2xl text-blue-100 max-w-2xl text-center leading-relaxed px-4">
+  <h1 className="mt-6 text-xl md:text-2xl text-blue-100 max-w-2xl text-center leading-relaxed px-4 font-normal">
 
    تبدیل ایده‌های پیچیده به ابزارهای هوشمند وب وداشبوردهای مدیریتی  حرفه ای اکسل
 
-  </p>
+  </h1>
   {/* دکمه با فاصله استاندارد از متن */}
 
   <div className="mt-8">
-<a
+<Link
   href="/portfolio"  className="inline-block px-8 py-4 bg-white text-blue-950 font-black rounded-xl hover:scale-105 transition-transform shadow-lg border-2 "
 >
   مشاهده نمونه‌کارها
-</a>
+</Link>
   </div>
 
 </section>
@@ -390,7 +420,7 @@ const projects = [
 ].map((item, idx) => (
           <SwiperSlide key={idx} className="pb-8 cursor-pointer" onClick={() => { setIndexAsil(idx); setOpenAsil(true); }}>
             <div className="flex flex-col">
-              <img src={optImg(item.src, "w_600")} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
+              <img src={optImg(item.src, "w_600")} alt={`${item.title} - ${item.text}`} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
               <div className="mt-3 text-right p-2">
                 <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
                 <p className="text-slate-600 text-xs mt-1">{item.text}</p>
@@ -465,7 +495,7 @@ const projects = [
               }}
             >
               <div className="flex flex-col">
-                <img src={optImg(item.src, "w_600")} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
+                <img src={optImg(item.src, "w_600")} alt={`${item.title} - ${item.text}`} loading="lazy" decoding="async" className="w-full h-48 object-cover rounded-2xl" />
                 <div className="mt-3 text-right p-2">
                   <h4 className="font-bold text-blue-950 text-sm">{item.title}</h4>
                   <p className="text-slate-600 text-xs mt-1">{item.text}</p>
@@ -502,15 +532,7 @@ const projects = [
     </h2>
     
     <div className="space-y-4">
-      {[
-        { q: "آیا وب‌سایت‌های شما امنیت کافی دارند؟", a: "بله. در طراحی و پیاده‌سازی وب‌سایت‌ها اصول امنیتی استاندارد (بر اساس توصیه‌های OWASP) را رعایت می‌کنیم؛ از جمله ارتباط رمزگذاری‌شده HTTPS با گواهی SSL معتبر، محافظت در برابر حملات رایج، اعتبارسنجی ورودی فرم‌ها و به‌روزرسانی منظم کتابخانه‌ها. این اقدامات ریسک را به‌طور جدی کاهش می‌دهد تا اطلاعات کسب‌وکار و مشتریان شما در سطح مناسبی محافظت شود." },
-        { q: "آیا وب‌ سایت ما می‌تواند به فایل‌های اکسل متصل شود؟",a:"تخصص ما در کنار طراحی وب، یکپارچه‌سازی سیستم‌های داده‌محور است. می‌توانم وب‌ سایت شما را به گونه‌ای طراحی کنم که داده‌های خروجیِ اکسل‌تان را به راحتی در پنل مدیریتی‌تان تحلیل و مشاهده کنید." 
-},
-        { q: "آیا سیستم با نرم‌افزارهای موجود سازگار است؟", a: "بله، راهکارهای من از طریق روش‌های استاندارد، با نرم‌افزارهای مالی و ERPهای داخلی هماهنگ می‌شوند." },
-        { q: "زمان تحویل پروژه هوشمندسازی اکسل چقدر است؟", a: "با توجه به تحلیل نیازهای شما، زمان‌بندی دقیق در جلسه مشاوره مشخص می‌شود اما به طور معمول پروژه‌ها بین ۷ تا ۱۵ روز کاری نهایی می‌شوند." },
-        { q: "آیا پس از تحویل، پشتیبانی فنی ارائه می‌دهید؟", a: "قطعا! تمامی پروژه‌ها دارای یک ماه پشتیبانی رایگان به همراه فیلم آموزشی و امکان تمدید قرارداد برای نگهداری و توسعه هستند." },
-        { q: "امنیت داده‌های حساس در اکسل چگونه تضمین می‌شود؟", a: "من از روش‌های محافظت از فایل و محدودسازی دسترسی در سطوح مختلف استفاده می‌کنم تا امنیت اطلاعات شما حفظ شود." }
-      ].map((faq, i) => (
+      {FAQS.map((faq, i) => (
         <details 
           key={i} 
           name="faq-accordion" 

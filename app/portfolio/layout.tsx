@@ -1,14 +1,18 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 import { MessageCircle } from 'lucide-react';
 import { IoLogoWhatsapp } from "react-icons/io";
 import { SiTelegram } from "react-icons/si";
 import { FaLinkedin } from 'react-icons/fa';
 import Footer from "../../components/Footer";
 import Counter from "../../components/Counter";
-import ProjectEstimator from '@/components/ProjectEstimator';
 import { projects as externalProjects } from './projectsData'; // ایمپورت کردن داده‌ها
+
+// مودال استعلام قیمت فقط هنگام باز شدن بارگذاری می‌شود (صفحه سبک‌تر بالا می‌آید)
+const ProjectEstimator = dynamic(() => import('@/components/ProjectEstimator'), { ssr: false });
 
 // ---------- بهینه‌سازی سرعت (Cloudinary + لود تنبل) ----------
 // تصویر: فرمت و کیفیت خودکار + عرض مناسب، به‌جای فایل PNG اصلی و سنگین
@@ -71,9 +75,9 @@ function LazyVideo({ src, poster, className }: { src: string; poster?: string; c
 
 const cloudinaryThumbnails: Record<string, string> = {
   "lidera.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_1",
-  "asil.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_2",
-  "shaho3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_3",
-  "gold-3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_4",
+"shaho3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_2",
+  "asil.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_3",
+   "gold-3.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_4",
   "SHIS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_5",
   "BPMRS.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_6",
   "AMAR.mp4": "https://res.cloudinary.com/<cloud-name>/image/upload/f_auto,q_auto/LINK_7",
@@ -126,6 +130,23 @@ const projects = [
 
   { 
     id: 2, 
+    title: "پلتفرم گردشگری شاهو تور", 
+    desc: "رزرو آنلاین تورهای داخلی، طبیعت‌گردی و اقامتگاه", 
+    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292021/shaho3.mp4",
+    liveLink: "https://shahotour.ir",
+    fullDetail: `در صنعت گردشگری، ارائه اطلاعات شفاف و فرآیند رزرو سریع، کلید تبدیل بازدیدکننده به مشتری است. وب‌سایت شاهو یک پلتفرم پویا برای معرفی، مدیریت و فروش پکیج‌های تور داخلی و خارجی است.
+
+قابلیت‌های کلیدی سیستم:
+🔹   دموی اولیه مدیریت داینامیک تورها: امکان تعریف پکیج‌های مسافرتی، زمان‌بندی حرکت، ظرفیت هتل‌ها و نرخ‌گذاری هوشمند بر اساس فصول.
+🔹 درگاه پرداخت و ررزواسیون آنلاین: فرآیند کاملاً خودکار ثبت‌نام مسافران، تایید مدارک و صدور آنی بلیط و واچر هتل.
+🔹 پنل کاربری تخصصی: فضای اختصاصی برای مسافران جهت پیگیری سوابق سفرها، تراکنش‌های مالی و دریافت اطلاعیه‌های سفر.
+
+این پروژه یک راهکار فول‌استک برای آژانس‌های مسافرتی است که زنجیره فروش سنتی را به یک موتور درآمدزایی آنلاین تبدیل می‌کند.`, 
+    color: "from-green-500 to-emerald-700",
+  },
+
+  { 
+    id: 3, 
     title: "سیستم هوشمند مدیریت رستوران (اصیل)", 
     desc: "اتوماسیون کامل سفارشات آنلاین، سالن و آشپزخانه", 
     video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292187/asil.mp4", 
@@ -141,22 +162,7 @@ const projects = [
 این سیستم با حذف خطاهای انسانی در ثبت سفارش، تجربه مشتری و بهره‌وری نیروی کار را به حداکثر می‌رساند.`, 
     color: "from-blue-500 to-blue-700"
   },
-  { 
-    id: 3, 
-    title: "پلتفرم گردشگری شاهو تور", 
-    desc: "رزرو آنلاین تورهای داخلی، طبیعت‌گردی و اقامتگاه", 
-    video: "https://res.cloudinary.com/ljt42uzz/video/upload/f_auto,q_auto/v1795292021/shaho3.mp4",
-    liveLink: "https://shahotour.ir",
-    fullDetail: `در صنعت گردشگری، ارائه اطلاعات شفاف و فرآیند رزرو سریع، کلید تبدیل بازدیدکننده به مشتری است. وب‌سایت شاهو یک پلتفرم پویا برای معرفی، مدیریت و فروش پکیج‌های تور داخلی و خارجی است.
 
-قابلیت‌های کلیدی سیستم:
-🔹   دموی اولیه مدیریت داینامیک تورها: امکان تعریف پکیج‌های مسافرتی، زمان‌بندی حرکت، ظرفیت هتل‌ها و نرخ‌گذاری هوشمند بر اساس فصول.
-🔹 درگاه پرداخت و ررزواسیون آنلاین: فرآیند کاملاً خودکار ثبت‌نام مسافران، تایید مدارک و صدور آنی بلیط و واچر هتل.
-🔹 پنل کاربری تخصصی: فضای اختصاصی برای مسافران جهت پیگیری سوابق سفرها، تراکنش‌های مالی و دریافت اطلاعیه‌های سفر.
-
-این پروژه یک راهکار فول‌استک برای آژانس‌های مسافرتی است که زنجیره فروش سنتی را به یک موتور درآمدزایی آنلاین تبدیل می‌کند.`, 
-    color: "from-green-500 to-emerald-700",
-  },
   { 
     id: 4, 
     title: "داشبورد هوشمند ارزی و مالی اکسل", 
@@ -275,6 +281,7 @@ export default function Portfolio() {
   const [dailyHours, setDailyHours] = useState<number>(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // بستن مودال استعلام قیمت با کلید Esc
   useEffect(() => {
@@ -312,12 +319,12 @@ export default function Portfolio() {
           <div className="text-2xl font-black text-blue-950">My<span className="text-amber-500">Pro</span>Web</div>
           
           <div className="hidden md:flex gap-6 font-bold text-blue-950 items-center">
-            <a href="/" className="hover:text-amber-500 transition-colors">خانه</a>
+            <Link href="/" className="hover:text-amber-500 transition-colors">خانه</Link>
             <a href="#projects" className="hover:text-amber-500 transition-colors">پروژه‌ها</a>
             <a href="#consulat" className="hover:text-amber-500 transition-colors">مشاوره رایگان</a>
             <a href="#result" className="hover:text-amber-500 transition-colors">نتایج ملموس</a>
-            <a href="/terms" className="hover:text-amber-500 transition-colors">مسیر همکاری</a>
-            <a href="/contact" className="hover:text-amber-500 transition-colors">تماس با ما</a>
+            <Link href="/terms" className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
+            <Link href="/contact" className="hover:text-amber-500 transition-colors">تماس با ما</Link>
             
             <button 
               onClick={() => setIsEstimatorOpen(true)} 
@@ -326,7 +333,33 @@ export default function Portfolio() {
               استعلام قیمت
             </button>
           </div>
+          {/* دکمه منوی موبایل */}
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="منو"
+            aria-expanded={isMenuOpen}
+            className="md:hidden p-2 text-blue-950"
+          >
+            {isMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" /></svg>
+            )}
+          </button>
         </nav>
+        {/* منوی موبایل */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 bg-white px-8 py-4 flex flex-col gap-4 font-bold text-blue-950">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">خانه</Link>
+            <a href="#projects" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">پروژه‌ها</a>
+            <a href="#consulat" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مشاوره رایگان</a>
+            <a href="#result" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">نتایج ملموس</a>
+            <Link href="/terms" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
+            <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="hover:text-amber-500 transition-colors">تماس با ما</Link>
+            <button onClick={() => { setIsMenuOpen(false); setIsEstimatorOpen(true); }} className="bg-amber-500 text-white px-6 py-2.5 rounded-full font-black">استعلام قیمت</button>
+          </div>
+        )}
       </header>
 
       {/* مودال استعلام قیمت (خارج از هدر و ناف قرار دارد) */}
@@ -344,7 +377,7 @@ export default function Portfolio() {
       {/* این بخشِ آبی‌رنگِ صفحه است */}
       <section className="py-25 bg-[#0b2447] text-center overflow-hidden">
         {/* تیتر پروژه‌های سودآور با رنگ سفید و نارنجی */}
-        <motion.h2 
+        <motion.h1 
           className="text-3xl md:text-3xl font-black mb-8 select-none"
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -359,9 +392,9 @@ export default function Portfolio() {
             }
           }}
         >
-          <span className="text-white">پروژه‌های </span>
-          <span className="text-amber-500">سودآور</span>
-        </motion.h2>
+          <span className="text-white">نمونه‌کارهای </span>
+          <span className="text-amber-500">طراحی سایت و داشبورد هوشمند اکسل</span>
+        </motion.h1>
 
         {/* باکس متحرک که به صورت خودکار خودش را نشان می‌دهد */}
         <div className="max-w-3xl mx-auto px-3">
@@ -630,7 +663,7 @@ export default function Portfolio() {
               </a>
 
               {/* تلگرام */}
-              <a href="https://telegram.me/@myproweb56" target="_blank" className="group relative flex items-center justify-end">
+              <a href="https://telegram.me/myproweb56" target="_blank" className="group relative flex items-center justify-end">
                 <span className="absolute left-20 hidden group-hover:block bg-white text-black px-4 py-1 rounded-lg shadow-md text-sm whitespace-nowrap">ارتباط تلگرام</span>
                 <div className="w-14 h-14 bg-[#3E99D8] rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110">
                   <SiTelegram size={30} color="white" />

@@ -31,9 +31,9 @@ export default function Footer({ setIsTimeModalOpen }: any) {
         <Link href="/terms" className="hover:text-amber-500 transition-colors">مسیر همکاری</Link>
       </li>
       <li>
-       <a href="/portfolio#consulat" className="hover:text-amber-500 transition-colors">
+       <Link href="/portfolio#consulat" className="hover:text-amber-500 transition-colors">
   مشاوره رایگان
-</a>
+</Link>
       </li>
       <li>
         <Link href="/portfolio#projects" className="hover:text-amber-500 transition-colors">نمونه پروژه‌های سودآور</Link>
@@ -68,7 +68,7 @@ export default function Footer({ setIsTimeModalOpen }: any) {
     <img 
       referrerPolicy="origin" 
       src="https://trustseal.enamad.ir/logo.aspx?id=750152&Code=d7LDKiWiCltqdvBMTSzMnBSq7sfXd4Pe" 
-      alt="اینماد" 
+      alt="اینماد" loading="lazy" decoding="async" 
       style={{ cursor: 'pointer' }} 
       className="w-12 h-12 object-contain bg-white rounded-lg p-1" // این کلاس‌ها را حتماً اضافه کن
     />

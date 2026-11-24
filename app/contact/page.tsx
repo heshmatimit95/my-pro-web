@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+// متادیتای اختصاصی این صفحه (عنوان، توضیح و canonical خودش)
+export const metadata: Metadata = {
+  title: "تماس با ما | هوشمندسازی مای پرو وب",
+  description:
+    "راه‌های ارتباط با تیم فنی مای پرو وب: شماره پشتیبانی، ایمیل و تلگرام. پاسخگویی در روزهای کاری ۹ صبح تا ۶ عصر.",
+  alternates: { canonical: "https://myproweb.ir/contact" },
+};
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#0b2447] py-20 px-6" dir="rtl">
@@ -35,12 +46,12 @@ export default function ContactPage() {
 
         {/* دکمه بازگشت */}
         <div className="mt-12 text-center">
-          <a 
+          <Link 
             href="/" 
             className="inline-block px-8 py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-full transition-all transform hover:scale-105"
           >
             بازگشت به صفحه اصلی
-          </a>
+          </Link>
         </div>
 
       </div>

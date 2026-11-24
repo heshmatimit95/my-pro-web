@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+// متادیتای اختصاصی این صفحه (عنوان، توضیح و canonical خودش)
+export const metadata: Metadata = {
+  title: "شرایط و مسیر همکاری | هوشمندسازی مای پرو وب",
+  description:
+    "مدل پرداخت مرحله‌ای، دوره تضمین کیفیت ۳۰ روزه و تعهدات طرفین در همکاری با مای پرو وب؛ شفاف و بر پایه صداقت.",
+  alternates: { canonical: "https://myproweb.ir/terms" },
+};
+
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#0b2447] py-12 px-4 md:px-6" dir="rtl">
@@ -56,12 +67,12 @@ export default function TermsPage() {
 
         {/* دکمه بازگشت */}
         <div className="mt-10 text-center">
-          <a 
+          <Link 
             href="/" 
             className="inline-block px-8 py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-full transition-all text-sm md:text-base"
           >
             بازگشت به صفحه اصلی
-          </a>
+          </Link>
         </div>
       </div>
     </div>
